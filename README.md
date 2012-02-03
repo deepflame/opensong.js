@@ -9,3 +9,8 @@ Opensong.js is a JQuery plugin to display [OpenSong](http://opensong.org) files 
 > OpenSong releases are available for Microsoft Windows, Mac OSX, and Linux operating systems.   
 >   
 > [Download](http://opensong.org/d/downloads) the full application for free and give it a try!
+
+
+## License
+
+[GNU General Public License, version 2 (GPL-2.0)](http://www.opensource.org/licenses/gpl-2.0.php)
