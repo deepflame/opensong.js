@@ -13,4 +13,4 @@ Opensong.js is a JQuery plugin to display [OpenSong](http://opensong.org) files 
 
 ## License
 
-[GNU General Public License, version 2 (GPL-2.0)](http://www.opensource.org/licenses/gpl-2.0.php)
+[The GNU Lesser General Public License, version 2.1 (LGPL-2.1)](http://www.opensource.org/licenses/lgpl-2.1.php)
