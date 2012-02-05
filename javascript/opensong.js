@@ -1,4 +1,10 @@
 (function($)
+/*
+ *  Project: opensong.js
+ *  Description: displays OpenSong files nicely on a web page
+ *  Author: Andreas Boehrnsen
+ *  License: LGPL 2.1
+ */
 {
   // jQuery wrapper around openSongLyrics function
   $.fn.openSongLyrics = function(lyrics) {
