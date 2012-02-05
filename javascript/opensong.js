@@ -1,10 +1,13 @@
-(function($)
 /*
  *  Project: opensong.js
  *  Description: displays OpenSong files nicely on a web page
  *  Author: Andreas Boehrnsen
  *  License: LGPL 2.1
  */
+
+// the semi-colon before function invocation is a safety net against concatenated 
+// scripts and/or other plugins which may not be closed properly.
+;(function($)
 {
   // jQuery wrapper around openSongLyrics function
   $.fn.openSongLyrics = function(lyrics) {
@@ -14,6 +17,7 @@
       alert(e);
     }
   }
+  
   // displays Opensong 
   function openSongLyrics(domElem, lyrics) {
     // clear Html Element and add opensong class
