@@ -8,8 +8,13 @@
 }
 
 .opensong table {
-  border-width: 0px;
-} 
+  border-collapse: collapse;
+}
+
+.opensong td {
+  padding-left: 0px;
+  padding-right: 0px;
+}
 
 .opensong tr.chords td {
   font-weight:bold;
