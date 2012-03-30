@@ -50,9 +50,16 @@
           if (chordArr.length == 0) {
             chordArr.push(chordsLine);            
           }
-        
-          // write html table row for the chords
-          var htmlTableRows = "<tr class='chords'><td></td><td>" + chordArr.join("</td><td>") + "</td></tr>\n";
+		  
+		  // clean Chord line from trailing white spaces
+		  var chordArrCleaned = new Array();;
+		  $.each(chordArr, function(index, value) {
+			  var m = /(\S*\s?)\s*/.exec(value);
+			  chordArrCleaned.push(m[1]);
+		  });
+
+          // write html table row for the chords        
+          var htmlTableRows = "<tr class='chords'><td></td><td>" + chordArrCleaned.join("</td><td>") + "</td></tr>\n";
         
           var textLine = "", m = null, cleanRegExp = /_|\||---|-!!/g;
                     
