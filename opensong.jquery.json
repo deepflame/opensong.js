@@ -1,0 +1,28 @@
+{
+  "name": "opensong",
+  "title": "OpenSong",
+  "description": "The best jQuery plugin ever.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/aboehrnsen/opensong.js",
+  "author": {
+    "name": "Andreas Boehrnsen",
+    "email": "andreas@boehrnsen.de"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/aboehrnsen/opensong.js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/aboehrnsen/opensong.js/issues"
+  },
+  "licenses": [
+    {
+      "type": "LGPL",
+      "url": "https://github.com/aboehrnsen/opensong.js/blob/master/LICENSE-LGPL"
+    }
+  ],
+  "dependencies": {
+    "jquery": ">= 1.6"
+  },
+  "keywords": []
+}
