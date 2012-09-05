@@ -11,6 +11,18 @@ module.exports = function(grunt) {
         '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
         ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */'
     },
+    coffee: {
+      app: {
+        src: ['src/**/*.coffee'],
+        dest: 'dist',
+        options: {
+          bare: false
+        }
+      }
+    },
+    coffeelint: {
+      app: ['src/**/*.coffee']
+    },
     concat: {
       dist: {
         src: ['<banner:meta.banner>', '<file_strip_banner:src/<%= pkg.name %>.js>'],
@@ -23,8 +35,8 @@ module.exports = function(grunt) {
         dest: 'dist/<%= pkg.name %>.min.js'
       }
     },
-    qunit: {
-      files: ['test/**/*.html']
+    mocha: {
+      index: ['specs/index.html']
     },
     lint: {
       files: ['grunt.js', 'src/**/*.js', 'test/**/*.js']
@@ -54,7 +66,10 @@ module.exports = function(grunt) {
     uglify: {}
   });
 
+  grunt.loadNpmTasks('grunt-coffee');
+  grunt.loadNpmTasks('grunt-coffeelint');
+  grunt.loadNpmTasks('grunt-mocha');
+
   // Default task.
   grunt.registerTask('default', 'lint qunit concat min');
-
 };
