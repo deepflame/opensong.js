@@ -15,6 +15,22 @@ $.fn.extend
 
 # displays Opensong 
 openSongLyrics = (domElem, lyrics) ->
+
+  replaceHeader = (abbr) ->
+    switch abbr
+      when "C"
+        "Chorus "
+      when "V"
+        "Verse "
+      when "B"
+        "Bridge "
+      when "T"
+        "Tag "
+      when "P"
+        "Pre-Chorus "
+      else
+        abbr
+
   # clear Html Element and add opensong class
   $(domElem).html("").addClass "opensong"
   
@@ -81,17 +97,3 @@ openSongLyrics = (domElem, lyrics) ->
       else
         console.log "no support for :" + line
 
-  replaceHeader = (abbr) ->
-    switch abbr
-      when "C"
-        "Chorus "
-      when "V"
-        "Verse "
-      when "B"
-        "Bridge "
-      when "T"
-        "Tag "
-      when "P"
-        "Pre-Chorus "
-      else
-        abbr
