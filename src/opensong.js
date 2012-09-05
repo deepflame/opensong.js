@@ -5,9 +5,7 @@
  *  License: LGPL 2.1
  */
 
-// the semi-colon before function invocation is a safety net against concatenated 
-// scripts and/or other plugins which may not be closed properly.
-;(function($)
+(function($)
 {
   // jQuery wrapper around openSongLyrics function
   $.fn.openSongLyrics = function(lyrics) {
@@ -16,7 +14,7 @@
     } catch(e) {
       alert(e);
     }
-  }
+  };
   
   // displays Opensong 
   function openSongLyrics(domElem, lyrics) {
@@ -30,16 +28,16 @@
     
       switch(line[0]) {
         case "[":
-          var header = line.match(/\[(.*)\]/)[1]
+          var header = line.match(/\[(.*)\]/)[1];
           // replace first char (e.g. V -> Verse)
           header = header.replace(header[0], replaceHeader(header[0]));
           
           $(domElem).append("<h2>" + header + "</h2>");
-          break
+          break;
         case ".":
           var chordsLine = line.substr(1);
         
-          var chordArr = new Array();
+          var chordArr = [];
           // split cords
           while (chordsLine.length > 0) {
             var m = /^(\S*\s*)(.*)$/.exec(chordsLine);
@@ -47,16 +45,16 @@
             chordsLine = m[2];
           }
           // add an item if it is an empty line
-          if (chordArr.length == 0) {
+          if (chordArr.length === 0) {
             chordArr.push(chordsLine);            
           }
-		  
-		  // clean Chord line from trailing white spaces
-		  var chordArrCleaned = new Array();;
-		  $.each(chordArr, function(index, value) {
-			  var m = /(\S*\s?)\s*/.exec(value);
-			  chordArrCleaned.push(m[1]);
-		  });
+
+          // clean Chord line from trailing white spaces
+          var chordArrCleaned = [];
+          $.each(chordArr, function(index, value) {
+            var m = /(\S*\s?)\s*/.exec(value);
+            chordArrCleaned.push(m[1]);
+          });
 
           // write html table row for the chords        
           var htmlTableRows = "<tr class='chords'><td></td><td>" + chordArrCleaned.join("</td><td>") + "</td></tr>\n";
@@ -65,7 +63,7 @@
                     
           // while we have lines that match a textLine create an html table row
           while ((textLine = lyricsLines.shift()) && (m = textLine.match(/^([ 1-9])(.*)/))) {
-            var textArr = new Array();
+            var textArr = [];
             var textLineNr = m[1];
             textLine = m[2];
             
@@ -87,7 +85,7 @@
             htmlTableRows = htmlTableRows + "<tr class='lyrics'><td>" + textLineNr + "</td><td>" + textArr.join("</td><td>") + "</td></tr>\n";
           }
           // attach the line again in front (we cut it off in the while loop)
-          if(textLine !== undefined) lyricsLines.unshift(textLine);
+          if(textLine !== undefined) { lyricsLines.unshift(textLine); }
         
           $(domElem).append("<table>" + htmlTableRows + "</table>");
           break;
@@ -99,7 +97,7 @@
           break;
         default:
           console.log("no support for :" + line);
-      };
+      }
     }
 
     function replaceHeader(abbr) {
