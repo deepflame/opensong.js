@@ -1,9 +1,9 @@
-#
-#  Project: opensong.js
-#  Description: displays OpenSong files nicely on a web page
-#  Author: Andreas Boehrnsen
-#  License: LGPL 2.1
-#
+###
+ Project: opensong.js
+ Description: displays OpenSong files nicely on a web page
+ Author: Andreas Boehrnsen
+ License: LGPL 2.1
+###
 
 # Reference jQuery
 $ = jQuery
@@ -38,6 +38,9 @@ openSongLyrics = (domElem, lyrics) ->
 
   while lyricsLines.length > 0
     line = lyricsLines.shift()
+
+    continue unless line?
+
     switch line[0]
       when "["
         header = line.match(/\[(.*)\]/)[1]
@@ -88,7 +91,7 @@ openSongLyrics = (domElem, lyrics) ->
           htmlTableRows = htmlTableRows + "<tr class='lyrics'><td>" + textLineNr + "</td><td>" + textArr.join("</td><td>") + "</td></tr>\n"
         
         # attach the line again in front (we cut it off in the while loop)
-        lyricsLines.unshift textLine if textLine isnt `undefined`
+        lyricsLines.unshift textLine if textLine isnt 'undefined'
         $(domElem).append "<table>" + htmlTableRows + "</table>"
       when " "
         $(domElem).append "<div class='lyrics'>" + line.substr(1) + "</div>"
