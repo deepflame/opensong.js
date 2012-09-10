@@ -8,6 +8,22 @@
 # Reference jQuery
 $ = jQuery
 
+
+Handlebars.registerHelper 'human_header', (abbr) ->
+  switch abbr
+    when "C"
+      "Chorus "
+    when "V"
+      "Verses "
+    when "B"
+      "Bridge "
+    when "T"
+      "Tag "
+    when "P"
+      "Pre-Chorus "
+    else
+      abbr
+
 # jQuery wrapper around openSongLyrics function
 $.fn.extend
   openSongLyrics: (lyrics) ->
@@ -16,25 +32,56 @@ $.fn.extend
 # displays Opensong 
 openSongLyrics = (domElem, lyrics) ->
 
-  replaceHeader = (abbr) ->
-    switch abbr
-      when "C"
-        "Chorus "
-      when "V"
-        "Verse "
-      when "B"
-        "Bridge "
-      when "T"
-        "Tag "
-      when "P"
-        "Pre-Chorus "
-      else
-        abbr
+  ###
+
+  json = [
+    {
+      header: "V",
+      lines: [
+        {
+          chords: ["A", "C"],
+          lyrics: [
+            ["Yeah", "Yeah, God is grea!"]
+          ]
+        },
+        {
+          comments: "This is a comment"
+        }
+      ]
+    }
+  ]
+
+  ###
+
+  templateSrc = """
+    {{#this}}
+    <h2>{{human_header header}}</h2>
+      {{#lines}}
+    <table>
+      <tr class="chords">
+        {{#chords}}
+        <td>{{this}}</td>
+        {{/chords}}
+      </tr>
+        {{#lyrics}}
+      <tr class='lyrics'>
+          {{#this}}
+        <td>{{this}}</td>
+          {{/this}}
+      </tr>
+        {{/lyrics}}
+    </table>
+      {{/lines}}
+    {{/this}}
+  """
+  template = Handlebars.compile templateSrc
 
   # clear Html Element and add opensong class
   $(domElem).html("").addClass "opensong"
   
   lyricsLines = lyrics.split("\n")
+
+  dataModel = []
 
   while lyricsLines.length > 0
     line = lyricsLines.shift()
@@ -44,9 +91,11 @@ openSongLyrics = (domElem, lyrics) ->
     switch line[0]
       when "["
         header = line.match(/\[(.*)\]/)[1]
-        # replace first char (e.g. V -> Verse)
-        header = header.replace(header[0], replaceHeader(header[0]))
-        $(domElem).append "<h2>" + header + "</h2>"
+
+        dataObject = 
+          header: header
+          lines: []
+        dataModel.push dataObject
       when "."
         chordsLine = line.substr(1)
 
@@ -65,11 +114,12 @@ openSongLyrics = (domElem, lyrics) ->
           m = /(\S*\s?)\s*/.exec(value)
           chordArrCleaned.push m[1]
 
-        # write html table row for the chords
-        htmlTableRows = "<tr class='chords'><td></td><td>" + chordArrCleaned.join("</td><td>") + "</td></tr>\n"
+
         textLine = ""
         m = null
         cleanRegExp = /_|\||---|-!!/g
+
+        textLineArr = []
 
         # while we have lines that match a textLine create an html table row
         while (textLine = lyricsLines.shift()) and (m = textLine.match(/^([ 1-9])(.*)/))
@@ -87,16 +137,20 @@ openSongLyrics = (domElem, lyrics) ->
             else
               # add the whole string if at the end of the chord arr
               textArr.push textLine.replace(cleanRegExp, "")
-          # write html table row for the text (lyrics)
-          htmlTableRows = htmlTableRows + "<tr class='lyrics'><td>" + textLineNr + "</td><td>" + textArr.join("</td><td>") + "</td></tr>\n"
+
+          textLineArr.push textArr
+
+        dataObject.lines.push
+          chords: chordArrCleaned
+          lyrics: textLineArr
         
         # attach the line again in front (we cut it off in the while loop)
         lyricsLines.unshift textLine if textLine isnt 'undefined'
-        $(domElem).append "<table>" + htmlTableRows + "</table>"
       when " "
-        $(domElem).append "<div class='lyrics'>" + line.substr(1) + "</div>"
+        dataObject.lines.push {lyrics: line.substr(1)}
       when ";"
-        $(domElem).append "<div class='comments'>" + line.substr(1) + "</div>"
+        dataObject.lines.push {comments: line.substr(1)}
       else
         console.log "no support for :" + line
 
+  $(domElem).append template(dataModel)
