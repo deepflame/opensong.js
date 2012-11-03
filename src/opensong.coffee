@@ -156,4 +156,12 @@ openSong =
           console.log "no support for: #{line}"
     dataModel
 
+  transposeChord: (chord, amount) ->
+    chords = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+    index = chords.indexOf chord
+    return chord if index < 0 # return chord if not found
+
+    newIndex = index + amount
+    newIndex = chords.length + newIndex if newIndex < 0
+    transposedChord = chords[newIndex % chords.length]
 
