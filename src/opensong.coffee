@@ -161,11 +161,18 @@ openSong =
       "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B",
       "C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"
     ]
-    [_, chordRoot, chordExt] = /^([A-G][#b]?)(.*)$/.exec chord
-    index = chords.indexOf chordRoot
-    return chord if index < 0 # return chord if not found
 
-    # make negative amounts work, always transpose to sharps
-    newIndex = (index + amount + chords.length) % (chords.length / 2)
-    chords[newIndex] + chordExt
+    outputChords = []
+    for c in chord.split "/"
+      [_, chordRoot, chordExt] = /^([A-G][#b]?)(.*)$/.exec c
+      index = chords.indexOf chordRoot
+      if index < 0 # use chord if not found
+        outputChords.push c
+        continue
+
+      # make negative amounts work, always transpose to sharps
+      newIndex = (index + amount + chords.length) % (chords.length / 2)
+      outputChords.push chords[newIndex] + chordExt
+
+    outputChords.join "/"
 

@@ -22,5 +22,8 @@ describe "openSong", ->
       expect(openSong.transposeChord "Cmaj7", 1).toEqual "C#maj7"
       expect(openSong.transposeChord "F#7",  -2).toEqual "E7"
 
+    it "transposes base chords", ->
+      expect(openSong.transposeChord "C/E",   1).toEqual "C#/F"
+      expect(openSong.transposeChord "Em/D", -2).toEqual "Dm/C"
 
 
