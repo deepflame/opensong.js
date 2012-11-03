@@ -157,11 +157,15 @@ openSong =
     dataModel
 
   transposeChord: (chord, amount) ->
-    chords = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
-    index = chords.indexOf chord
+    chords = [
+      "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B",
+      "C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"
+    ]
+    [_, chordRoot, chordExt] = /^([A-G][#b]?)(.*)$/.exec chord
+    index = chords.indexOf chordRoot
     return chord if index < 0 # return chord if not found
 
-    newIndex = index + amount
-    newIndex = chords.length + newIndex if newIndex < 0
-    transposedChord = chords[newIndex % chords.length]
+    # make negative amounts work, always transpose to sharps
+    newIndex = (index + amount + chords.length) % (chords.length / 2)
+    chords[newIndex] + chordExt
 
