@@ -5,8 +5,12 @@
  License: LGPL 2.1
 ###
 
-# Reference jQuery
-$ = jQuery
+
+# jQuery wrapper around openSongLyrics function
+if jQuery?
+  jQuery.fn.extend
+    openSongLyrics: (lyrics) ->
+      openSong.renderLyrics this, lyrics
 
 
 Handlebars.registerHelper 'human_header', (abbr) ->
@@ -23,11 +27,6 @@ Handlebars.registerHelper 'human_header', (abbr) ->
       "Pre-Chorus "
     else
       abbr
-
-# jQuery wrapper around openSongLyrics function
-$.fn.extend
-  openSongLyrics: (lyrics) ->
-    openSong.renderLyrics this, lyrics
 
 
 openSong =
@@ -57,6 +56,7 @@ openSong =
     template = Handlebars.compile templateSrc
 
     # clear Html Element and add opensong class
+    # TODO: remove dependency to jQuery
     $(domElem).html("").addClass "opensong"
     $(domElem).append template this.parseLyrics lyrics
 
