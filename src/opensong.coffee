@@ -153,7 +153,7 @@ openSong =
         when ";"
           dataObject.lines.push {comments: line.substr(1)}
         else
-          console.log "no support for: #{line}"
+          console?.log "no support for: #{line}"
     dataModel
 
   transposeChord: (chord, amount) ->
