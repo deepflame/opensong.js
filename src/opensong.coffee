@@ -164,7 +164,10 @@ openSong =
 
     outputChords = []
     for c in chord.split "/"
-      [_, chordRoot, chordExt] = /^([A-G][#b]?)(.*)$/.exec c
+      m = /^([A-G][#b]?)(.*)$/.exec c
+      return chord unless m
+
+      [_, chordRoot, chordExt] = m
       index = chords.indexOf chordRoot
       if index < 0 # use chord if not found
         outputChords.push c

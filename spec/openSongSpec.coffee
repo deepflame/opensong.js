@@ -2,6 +2,11 @@ describe "openSong", ->
 
   describe ".transposeChord", ->
 
+    it "handles some bad input", ->
+      expect(openSong.transposeChord "",  1).toEqual ""
+      expect(openSong.transposeChord "mali",  1).toEqual "mali"
+      #expect(openSong.transposeChord "C",  "err").toEqual "mali"
+
     it "transposes simple chords up", ->
       expect(openSong.transposeChord "A",  1).toEqual "A#"
       expect(openSong.transposeChord "A",  2).toEqual "B"
