@@ -31,7 +31,20 @@ Handlebars.registerHelper 'human_header', (abbr) ->
 
 openSong =
 
-  renderLyrics: (domElem, lyrics) ->
+  getDomElem: (domElem) ->
+    if typeof domElem is 'string'
+      return document.getElementById domElem
+
+    if domElem.jquery
+      return domElem.get(0)
+
+    if domElem.nodeType
+      return domElem
+
+    undefined
+
+  renderLyrics: (element, lyrics) ->
+    # TODO: support comments
     templateSrc = """
       {{#this}}
       <h2>{{human_header header}}</h2>
@@ -56,9 +69,9 @@ openSong =
     template = Handlebars.compile templateSrc
 
     # clear Html Element and add opensong class
-    # TODO: remove dependency to jQuery
-    $(domElem).html("").addClass "opensong"
-    $(domElem).append template this.parseLyrics lyrics
+    domElem = this.getDomElem element
+    domElem.innerHTML = template this.parseLyrics lyrics
+    domElem.className += " opensong" unless /opensong/.test domElem.className
 
 
   ###
