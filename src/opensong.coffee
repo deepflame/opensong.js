@@ -30,7 +30,7 @@ class OpenSong
       <table>
         <tr class="chords">
           {{#chords}}
-          <td>{{this}}</td>
+          <td>{{transpose this}}</td>
           {{/chords}}
         </tr>
           {{#lyrics}}
@@ -45,6 +45,12 @@ class OpenSong
       {{/this}}
     """
     @template = Handlebars.compile templateSrc
+
+  transpose: (amount) ->
+    Handlebars.registerHelper 'transpose', (chord) ->
+      transposeChord chord, amount || 0
+
+    this.renderLyrics() # rerender
 
   renderLyrics: ->
     # clear Html Element and add opensong class
@@ -200,4 +206,7 @@ class OpenSong
         "Pre-Chorus "
       else
         abbr
+
+  Handlebars.registerHelper 'transpose', (chord) ->
+    chord
 
