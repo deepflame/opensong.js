@@ -4,7 +4,7 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     pkg: '<json:opensong.jquery.json>',
-    
+
     meta: {
       banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
         '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
@@ -16,7 +16,12 @@ module.exports = function(grunt) {
     coffee: {
       app: {
         src: ['src/**/*.coffee'],
-        dest: 'dist',
+        options: {
+          bare: true
+        }
+      },
+      spec: {
+        src: ['spec/**/*.coffee'],
         options: {
           bare: true
         }
@@ -25,7 +30,7 @@ module.exports = function(grunt) {
     coffeelint: {
       app: ['src/**/*.coffee']
     },
-    
+
     concat: {
       dist: {
         src: ['<banner:meta.banner>', '<file_strip_banner:src/<%= pkg.name %>.js>'],
@@ -38,40 +43,13 @@ module.exports = function(grunt) {
         dest: 'dist/<%= pkg.name %>.min.js'
       }
     },
-    
-    mocha: {
-      index: ['specs/index.html']
-    },
-    
-    lint: {
-      files: ['grunt.js', 'src/**/*.js', 'test/**/*.js']
-    },
-    
-    jshint: {
-      options: {
-        curly: true,
-        eqeqeq: true,
-        immed: true,
-        latedef: true,
-        newcap: true,
-        noarg: true,
-        sub: true,
-        undef: true,
-        boss: true,
-        eqnull: true,
-        browser: true
-      },
-      globals: {
-        jQuery: true
-      }
-    },
-    
+
     server: {
       port: 8000,
       base: '.'
     },
     reload: {
-      port: 3000,
+      port: 3001,
       proxy: {
         host: 'localhost',
         port: '8000'
@@ -80,7 +58,7 @@ module.exports = function(grunt) {
 
     watch: {
       coffee: {
-        files: 'src/**/*.coffee',
+        files: ['src/**/*.coffee', 'spec/**/*.coffee'],
         tasks: 'coffee coffeelint'
       },
       reload: {
@@ -95,17 +73,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-coffee');
   grunt.loadNpmTasks('grunt-coffeelint');
   grunt.loadNpmTasks('grunt-reload');
-  grunt.loadNpmTasks('grunt-mocha');
 
   grunt.registerTask('wait', 'Wait forever.', function() {
     grunt.log.write('Waiting...');
     this.async();
   });
 
-  // Default task.
-  grunt.registerTask('default', 'server reload watch');
-
-  // TODO: add dist and test task
-  //grunt.registerTask('dist', 'server reload watch');
-  //grunt.registerTask('test', 'server reload watch');
+  grunt.registerTask('dist', 'coffee concat min');
+  grunt.registerTask('default', 'dist server reload watch'); // Default task.
 };
+

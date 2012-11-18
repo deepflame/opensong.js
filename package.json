@@ -1,17 +1,16 @@
 {
-  "name": "jquery-plugin",
+  "name": "opensong",
   "version": "0.0.0-ignored",
   "engines": {
     "node": ">= 0.6.0"
   },
   "scripts": {
-    "test": "grunt qunit"
+    "test": "grunt test"
   },
   "devDependencies": {
     "grunt": "~0.3.14",
     "grunt-coffee": "~0.0.6",
     "grunt-coffeelint": "~0.0.2",
     "grunt-reload": "~0.2.0",
-    "grunt-mocha":  "~0.1.3"
   }
 }
