@@ -186,19 +186,25 @@ class OpenSong
   ###
 
   Handlebars.registerHelper 'human_header', (abbr) ->
-    switch abbr
+    abbArr = /(\w)(\d)?/.exec(abbr)[1..]
+    char = abbArr[0]
+
+    abbArr[0] = switch char
       when "C"
-        "Chorus "
+        "Chorus"
       when "V"
-        "Verse "
+        "Verse"
       when "B"
-        "Bridge "
+        "Bridge"
       when "T"
-        "Tag "
+        "Tag"
       when "P"
-        "Pre-Chorus "
+        "Pre-Chorus"
       else
-        abbr
+        char
+
+    abbArr.pop() unless abbArr[1]? # remove num if empty
+    abbArr.join " "
 
   Handlebars.registerHelper 'transpose', (chord) ->
     chord
