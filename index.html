@@ -22,7 +22,7 @@
 
     $(document).ready(function() {
 
-      $.get('DemoSong', function(data) {
+      $.get('Amazing Grace', function(data) {
         var el       = $('#lyrics'),
             lyrics   = $(data).find("lyrics").text();
         openSong = new OpenSong(el, lyrics);
