@@ -38,12 +38,12 @@ class OpenSong
 
   transpose: (amount) ->
     Handlebars.registerHelper 'transpose', (chord) ->
-      transposeChord chord, amount || 0
+      opensong.helper.transposeChord chord, amount || 0
 
     this.renderLyrics() # rerender
 
   setLyrics: (lyrics) ->
-    @model = parseLyrics lyrics
+    @model = opensong.helper.parseLyrics lyrics
     this.renderLyrics()
 
   renderLyrics: ->
@@ -63,6 +63,61 @@ class OpenSong
       return domElem
 
     undefined
+
+  Handlebars.registerHelper 'human_header', (abbr) ->
+    opensong.helper.humanizeHeader abbr
+
+  Handlebars.registerHelper 'transpose', (chord) ->
+    chord # just return chord, no transposing initially
+
+
+opensong = opensong || {}
+opensong.helper = opensong.helper || {}
+
+opensong.helper.transposeChord = (chord, amount) ->
+    chords = [
+      "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B",
+      "C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"
+    ]
+
+    outputChords = []
+    for c in chord.split "/"
+      m = /^([A-G][#b]?)(.*)$/.exec c
+      return chord unless m
+
+      [_, chordRoot, chordExt] = m
+      index = chords.indexOf chordRoot
+      if index < 0 # use chord if not found
+        outputChords.push c
+        continue
+
+      # make negative amounts work, always transpose to sharps
+      newIndex = (index + amount + chords.length) % (chords.length / 2)
+      outputChords.push chords[newIndex] + chordExt
+
+    outputChords.join "/"
+
+
+opensong.helper.humanizeHeader = (abbr) ->
+    abbArr = /([a-zA-Z]+)(\d*)/.exec(abbr)[1..]
+    char = abbArr[0]
+
+    abbArr[0] = switch char
+      when "C"
+        "Chorus"
+      when "V"
+        "Verse"
+      when "B"
+        "Bridge"
+      when "T"
+        "Tag"
+      when "P"
+        "Pre-Chorus"
+      else
+        char
+
+    abbArr.pop() unless abbArr[1]? # remove num if empty
+    abbArr.join " "
 
   ###
 
@@ -84,7 +139,7 @@ class OpenSong
   ]
 
   ###
-  parseLyrics = (lyrics) ->
+opensong.helper.parseLyrics = (lyrics) ->
     lyricsLines = lyrics.split("\n")
 
     dataModel = []
@@ -158,55 +213,4 @@ class OpenSong
         else
           console?.log "no support for: #{line}"
     dataModel
-
-  transposeChord = (chord, amount) ->
-    chords = [
-      "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B",
-      "C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"
-    ]
-
-    outputChords = []
-    for c in chord.split "/"
-      m = /^([A-G][#b]?)(.*)$/.exec c
-      return chord unless m
-
-      [_, chordRoot, chordExt] = m
-      index = chords.indexOf chordRoot
-      if index < 0 # use chord if not found
-        outputChords.push c
-        continue
-
-      # make negative amounts work, always transpose to sharps
-      newIndex = (index + amount + chords.length) % (chords.length / 2)
-      outputChords.push chords[newIndex] + chordExt
-
-    outputChords.join "/"
-
-  ###
-  Handlebars Helpers
-  ###
-
-  Handlebars.registerHelper 'human_header', (abbr) ->
-    abbArr = /(\w)(\d)?/.exec(abbr)[1..]
-    char = abbArr[0]
-
-    abbArr[0] = switch char
-      when "C"
-        "Chorus"
-      when "V"
-        "Verse"
-      when "B"
-        "Bridge"
-      when "T"
-        "Tag"
-      when "P"
-        "Pre-Chorus"
-      else
-        char
-
-    abbArr.pop() unless abbArr[1]? # remove num if empty
-    abbArr.join " "
-
-  Handlebars.registerHelper 'transpose', (chord) ->
-    chord
 
