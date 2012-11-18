@@ -12,23 +12,6 @@ if jQuery?
     openSongLyrics: (lyrics) ->
       new OpenSong this, lyrics
 
-
-Handlebars.registerHelper 'human_header', (abbr) ->
-  switch abbr
-    when "C"
-      "Chorus "
-    when "V"
-      "Verse "
-    when "B"
-      "Bridge "
-    when "T"
-      "Tag "
-    when "P"
-      "Pre-Chorus "
-    else
-      abbr
-
-
 class OpenSong
 
   constructor: (element, lyrics) ->
@@ -198,4 +181,23 @@ class OpenSong
       outputChords.push chords[newIndex] + chordExt
 
     outputChords.join "/"
+
+  ###
+  Handlebars Helpers
+  ###
+
+  Handlebars.registerHelper 'human_header', (abbr) ->
+    switch abbr
+      when "C"
+        "Chorus "
+      when "V"
+        "Verse "
+      when "B"
+        "Bridge "
+      when "T"
+        "Tag "
+      when "P"
+        "Pre-Chorus "
+      else
+        abbr
 
