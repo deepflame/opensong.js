@@ -5,13 +5,6 @@
  License: LGPL 2.1
 ###
 
-
-# jQuery wrapper around openSongLyrics function
-if jQuery?
-  jQuery.fn.extend
-    openSongLyrics: (lyrics) ->
-      new OpenSong this, lyrics
-
 class OpenSong
 
   constructor: (element, lyrics) ->

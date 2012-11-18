@@ -8,13 +8,17 @@
   <script type="text/javascript" src="libs/handlebars/handlebars-1.0.0.beta.6.js"></script>
   <script type="text/javascript" src="dist/opensong.js"></script>
   <script type="text/javascript">
+
+    var openSong;
+
     $(document).ready(function() {
 
       $.get('DemoSong', function(data) {
-        var lyrics = $(data).find("lyrics").text();
-        $("#lyrics").openSongLyrics(lyrics);
+        var el       = $('#lyrics'),
+            lyrics   = $(data).find("lyrics").text();
+        openSong = new OpenSong(el, lyrics);
       });
-      
+
     });
   </script>
 </head>
