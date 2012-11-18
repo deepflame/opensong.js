@@ -10,7 +10,7 @@
 if jQuery?
   jQuery.fn.extend
     openSongLyrics: (lyrics) ->
-      openSong.renderLyrics this, lyrics
+      new OpenSong this, lyrics
 
 
 Handlebars.registerHelper 'human_header', (abbr) ->
@@ -29,21 +29,17 @@ Handlebars.registerHelper 'human_header', (abbr) ->
       abbr
 
 
-openSong =
+class OpenSong
 
-  getDomElem: (domElem) ->
-    if typeof domElem is 'string'
-      return document.getElementById domElem
+  constructor: (element, lyrics) ->
+    @el = getDomElem element
+    @model = parseLyrics lyrics
 
-    if domElem.jquery
-      return domElem.get(0)
+    #render initially
+    this.renderLyrics()
 
-    if domElem.nodeType
-      return domElem
 
-    undefined
-
-  renderLyrics: (element, lyrics) ->
+  renderLyrics: ->
     # TODO: support comments
     templateSrc = """
       {{#this}}
@@ -69,10 +65,21 @@ openSong =
     template = Handlebars.compile templateSrc
 
     # clear Html Element and add opensong class
-    domElem = this.getDomElem element
-    domElem.innerHTML = template this.parseLyrics lyrics
-    domElem.className += " opensong" unless /opensong/.test domElem.className
+    @el.innerHTML = template @model
+    @el.className += " opensong" unless /opensong/.test @el.className
 
+
+  getDomElem = (domElem) ->
+    if typeof domElem is 'string'
+      return document.getElementById domElem
+
+    if domElem.jquery
+      return domElem.get(0)
+
+    if domElem.nodeType
+      return domElem
+
+    undefined
 
   ###
 
@@ -94,7 +101,7 @@ openSong =
   ]
 
   ###
-  parseLyrics: (lyrics) ->
+  parseLyrics = (lyrics) ->
     lyricsLines = lyrics.split("\n")
 
     dataModel = []
@@ -169,7 +176,7 @@ openSong =
           console?.log "no support for: #{line}"
     dataModel
 
-  transposeChord: (chord, amount) ->
+  transposeChord = (chord, amount) ->
     chords = [
       "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B",
       "C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"
