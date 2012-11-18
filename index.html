@@ -10,6 +10,11 @@
       border-radius: 3px;
       padding: 8px;
     }
+    #controls label {
+      display: block;
+    }
+    #controls #lyrics-src {
+      color: darkgrey;
     }
   </style>
   <link rel="stylesheet" type="text/css" href="src/opensong.css" />
@@ -25,7 +30,13 @@
       $.get('Amazing Grace', function(data) {
         var el       = $('#lyrics'),
             lyrics   = $(data).find("lyrics").text();
+        $('#lyrics-src').html(lyrics);
+
         openSong = new OpenSong(el, lyrics);
+      });
+
+      $('#lyrics-src').keyup(function(e) {
+        openSong.setLyrics($(this).val());
       });
 
       $('#transpose-selector').change(function(e) {
@@ -39,7 +50,11 @@
 
 <h1>OpenSong Lyrics Test</h1>
 <div id="controls">
-  <label>Transpose by: </label>
+  <label>Lyrics src</label>
+  <textarea id="lyrics-src" cols="80" rows="10">
+  </textarea>
+
+  <label>Transpose by</label>
   <select id="transpose-selector">
     <option>+6</option>
     <option>+5</option>
@@ -60,3 +75,4 @@
 
 </body>
 </html>
+

@@ -9,35 +9,32 @@ class OpenSong
 
   constructor: (element, lyrics) ->
     @el = getDomElem element
-    @model = parseLyrics lyrics
+    @tpl = do ->
+      # TODO: support comments
+      templateSrc = """
+        {{#this}}
+        <h2>{{human_header header}}</h2>
+          {{#lines}}
+        <table>
+          <tr class="chords">
+            {{#chords}}
+            <td>{{transpose this}}</td>
+            {{/chords}}
+          </tr>
+            {{#lyrics}}
+          <tr class='lyrics'>
+              {{#this}}
+            <td>{{this}}</td>
+              {{/this}}
+          </tr>
+            {{/lyrics}}
+        </table>
+          {{/lines}}
+        {{/this}}
+      """
+      Handlebars.compile templateSrc
 
-    this._cacheTemplate()
-    this.renderLyrics()
-
-  _cacheTemplate: ->
-    # TODO: support comments
-    templateSrc = """
-      {{#this}}
-      <h2>{{human_header header}}</h2>
-        {{#lines}}
-      <table>
-        <tr class="chords">
-          {{#chords}}
-          <td>{{transpose this}}</td>
-          {{/chords}}
-        </tr>
-          {{#lyrics}}
-        <tr class='lyrics'>
-            {{#this}}
-          <td>{{this}}</td>
-            {{/this}}
-        </tr>
-          {{/lyrics}}
-      </table>
-        {{/lines}}
-      {{/this}}
-    """
-    @template = Handlebars.compile templateSrc
+    this.setLyrics lyrics
 
   transpose: (amount) ->
     Handlebars.registerHelper 'transpose', (chord) ->
@@ -45,9 +42,13 @@ class OpenSong
 
     this.renderLyrics() # rerender
 
+  setLyrics: (lyrics) ->
+    @model = parseLyrics lyrics
+    this.renderLyrics()
+
   renderLyrics: ->
     # clear Html Element and add opensong class
-    @el.innerHTML = @template @model
+    @el.innerHTML = @tpl @model
     @el.className += " opensong" unless /opensong/.test @el.className
 
 
