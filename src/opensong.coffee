@@ -18,11 +18,10 @@ class OpenSong
     @el = getDomElem element
     @model = parseLyrics lyrics
 
-    #render initially
+    this._cacheTemplate()
     this.renderLyrics()
 
-
-  renderLyrics: ->
+  _cacheTemplate: ->
     # TODO: support comments
     templateSrc = """
       {{#this}}
@@ -45,10 +44,11 @@ class OpenSong
         {{/lines}}
       {{/this}}
     """
-    template = Handlebars.compile templateSrc
+    @template = Handlebars.compile templateSrc
 
+  renderLyrics: ->
     # clear Html Element and add opensong class
-    @el.innerHTML = template @model
+    @el.innerHTML = @template @model
     @el.className += " opensong" unless /opensong/.test @el.className
 
 
