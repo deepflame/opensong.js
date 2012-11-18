@@ -2,7 +2,16 @@
 <html>
 <head>
   <title>OpenSong Test</title>
-  
+
+  <style>
+    #controls {
+      display: block;
+      border: solid 2px grey;
+      border-radius: 3px;
+      padding: 8px;
+    }
+    }
+  </style>
   <link rel="stylesheet" type="text/css" href="src/opensong.css" />
   <script type="text/javascript" src="libs/jquery/jquery.js"></script>
   <script type="text/javascript" src="libs/handlebars/handlebars-1.0.0.beta.6.js"></script>
@@ -19,12 +28,34 @@
         openSong = new OpenSong(el, lyrics);
       });
 
+      $('#transpose-selector').change(function(e) {
+        var amount = parseInt($(this).val());
+        openSong.transpose(amount);
+      });
     });
   </script>
 </head>
 <body>
 
 <h1>OpenSong Lyrics Test</h1>
+<div id="controls">
+  <label>Transpose by: </label>
+  <select id="transpose-selector">
+    <option>+6</option>
+    <option>+5</option>
+    <option>+4</option>
+    <option>+3</option>
+    <option>+2</option>
+    <option>+1</option>
+    <option selected="selected">0</option>
+    <option>-1</option>
+    <option>-2</option>
+    <option>-3</option>
+    <option>-4</option>
+    <option>-5</option>
+    <option>-6</option>
+  </select>
+</div>
 <div id="lyrics"></div>
 
 </body>
