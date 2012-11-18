@@ -59,7 +59,7 @@ module.exports = function(grunt) {
     watch: {
       coffee: {
         files: ['src/**/*.coffee', 'spec/**/*.coffee'],
-        tasks: 'coffee coffeelint'
+        tasks: 'coffee coffeelint concat'
       },
       reload: {
         files: ['dist/**'],
