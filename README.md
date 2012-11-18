@@ -1,6 +1,13 @@
 # opensong.js
 
-Opensong.js is a JQuery plugin to display [OpenSong](http://opensong.org) files nicely in a web page.
+Opensong.js is a Javascript/Coffeescript library to format and display [OpenSong](http://opensong.org) files nicely on a web page.
+
+It supports:
+
+- rendering lyrics
+- transposing chords
+
+Check out the index.html for a demo.
 
 ## What is OpenSong?
 
