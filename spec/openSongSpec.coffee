@@ -1,6 +1,11 @@
-describe "openSong", ->
+describe "opensong.helper", ->
 
   describe ".transposeChord", ->
+
+    openSong = null
+
+    beforeEach ->
+      openSong = opensong.helper
 
     it "handles some bad input", ->
       expect(openSong.transposeChord "",  1).toEqual ""
