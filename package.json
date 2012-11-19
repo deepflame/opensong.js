@@ -1,6 +1,28 @@
 {
   "name": "opensong",
   "version": "0.0.0-ignored",
+  "description": "Javascript/Coffeescript library to handle OpenSong files",
+  "keywords": [
+    "opensong",
+    "song",
+    "sheet",
+    "guitar"
+  ],
+  "homepage": "https://github.com/deepflame/opensong.js",
+  "repository": { 
+    "type": "git",
+    "url" : "https://github.com/deepflame/opensong.js.git"
+  },
+  "bugs": {
+    "url" : "https://github.com/deepflame/opensong.js/issues"
+  },
+  "author": "Andreas Boehrnsen",
+  "licenses": [
+    {
+      "type": "LGPL 2.1",
+      "url": "http://opensource.org/licenses/lgpl-2.1.php"
+    }
+  ],
   "engines": {
     "node": ">= 0.6.0"
   },
@@ -11,6 +33,6 @@
     "grunt": "~0.3.14",
     "grunt-coffee": "~0.0.6",
     "grunt-coffeelint": "~0.0.2",
-    "grunt-reload": "~0.2.0",
+    "grunt-reload": "~0.2.0"
   }
 }
