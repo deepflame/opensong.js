@@ -1,11 +1,18 @@
 describe "opensong.helper", ->
 
+  openSong = null
+
+  beforeEach ->
+    openSong = opensong.helper
+
+  describe ".humanizeHeader", ->
+
+    it "humanizes header", ->
+      expect(openSong.humanizeHeader 'C').toEqual 'Chorus'
+      expect(openSong.humanizeHeader 'V').toEqual 'Verse'
+      expect(openSong.humanizeHeader 'V1').toEqual 'Verse 1'
+
   describe ".transposeChord", ->
-
-    openSong = null
-
-    beforeEach ->
-      openSong = opensong.helper
 
     it "handles some bad input", ->
       expect(openSong.transposeChord "",  1).toEqual ""
