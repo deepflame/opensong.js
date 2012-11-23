@@ -116,7 +116,7 @@ opensong.helper.humanizeHeader = (abbr) ->
     else
       char
 
-  abbArr.pop() unless abbArr[1]? # remove num if empty
+  abbArr.pop() if abbArr[1] is "" # remove num if empty
   abbArr.join " "
 
 ###
