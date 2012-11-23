@@ -4,6 +4,9 @@
   <title>OpenSong Test</title>
 
   <style>
+    * {
+      ont-family:Helvetica Neue,Helvitica,Verdana,sans-serif;
+    }
     #controls {
       display: block;
       border: solid 2px grey;
@@ -32,7 +35,7 @@
             lyrics   = $(data).find("lyrics").text();
         $('#lyrics-src').html(lyrics);
 
-        openSong = new OpenSong(el, lyrics);
+        openSong = new opensong.Song(el, lyrics);
       });
 
       $('#lyrics-src').keyup(function(e) {

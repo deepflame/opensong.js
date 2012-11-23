@@ -5,7 +5,10 @@
  License: LGPL 2.1
 ###
 
-class OpenSong
+opensong = opensong || {}
+opensong.helper = opensong.helper || {}
+
+class opensong.Song
 
   constructor: (element, lyrics) ->
     @el = getDomElem element
@@ -70,9 +73,6 @@ class OpenSong
   Handlebars.registerHelper 'transpose', (chord) ->
     chord # just return chord, no transposing initially
 
-
-opensong = opensong || {}
-opensong.helper = opensong.helper || {}
 
 opensong.helper.transposeChord = (chord, amount) ->
   chords = [
