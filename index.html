@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>OpenSong Test</title>
+
+  <style>
+    #controls {
+      display: block;
+      border: solid 2px grey;
+      border-radius: 3px;
+      padding: 8px;
+    }
+    #controls label {
+      display: block;
+    }
+    #controls #lyrics-src {
+      color: darkgrey;
+    }
+  </style>
+  <link rel="stylesheet" type="text/css" href="src/opensong.css" />
+  <script type="text/javascript" src="libs/jquery/jquery.js"></script>
+  <script type="text/javascript" src="libs/handlebars/handlebars-1.0.0.beta.6.js"></script>
+  <script type="text/javascript" src="dist/opensong.min.js"></script>
+  <script type="text/javascript">
+
+    var openSong;
+
+    $(document).ready(function() {
+
+      $.get('Amazing Grace', function(data) {
+        var el       = $('#lyrics'),
+            lyrics   = $(data).find("lyrics").text();
+        $('#lyrics-src').html(lyrics);
+
+        openSong = new opensong.Song(el, lyrics);
+      });
+
+      $('#lyrics-src').keyup(function(e) {
+        openSong.setLyrics($(this).val());
+      });
+
+      $('#transpose-selector').change(function(e) {
+        var amount = parseInt($(this).val());
+        openSong.transpose(amount);
+      });
+    });
+  </script>
+</head>
+<body>
+
+<h1>OpenSong Lyrics Demo</h1>
+<div id="controls">
+  <label>Lyrics src</label>
+  <textarea id="lyrics-src" cols="80" rows="10">
+  </textarea>
+
+  <label>Transpose by</label>
+  <select id="transpose-selector">
+    <option>+6</option>
+    <option>+5</option>
+    <option>+4</option>
+    <option>+3</option>
+    <option>+2</option>
+    <option>+1</option>
+    <option selected="selected">0</option>
+    <option>-1</option>
+    <option>-2</option>
+    <option>-3</option>
+    <option>-4</option>
+    <option>-5</option>
+    <option>-6</option>
+  </select>
+</div>
+<div id="lyrics"></div>
+
+<hr/>
+<p>
+  LGPL 2.1 <a href="https://github.com/deepflame/opensong.js">Project page</a>
+</p>
+
+</body>
+</html>
+
