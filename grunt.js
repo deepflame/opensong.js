@@ -44,10 +44,12 @@ module.exports = function(grunt) {
       }
     },
 
+    // use the 'reload' port to use reloading func
     server: {
       port: 8000,
       base: '.'
     },
+    //FIXME: reloading
     reload: {
       port: 3001,
       proxy: {
