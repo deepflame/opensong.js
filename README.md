@@ -7,7 +7,7 @@ It supports:
 - rendering lyrics
 - transposing chords
 
-Check out the index.html for a demo.
+Check out the [Demo](http://deepflame.github.com/opensong.js/ "Demo").
 
 ## What is OpenSong?
 
