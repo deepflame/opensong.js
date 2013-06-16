@@ -1,87 +1,51 @@
 /*global module:false*/
 module.exports = function(grunt) {
 
-  // Project configuration.
-  grunt.initConfig({
-    pkg: '<json:package.json>',
+	// Project configuration.
+	grunt.initConfig({
+		pkg: grunt.file.readJSON('package.json'),
 
-    meta: {
-      banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
-        '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
-        '<%= pkg.homepage ? " * " + pkg.homepage + "\n" : "" %>' +
-        ' * Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author %>;' +
-        ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %>\n */'
-    },
+		copy: {
+			bower: {
+				files: [
+					{expand: true, flatten: true, src: ['components/jquery/jquery.js'], dest: 'temp/'},
+					{expand: true, flatten: true, src: ['components/handlebars/handlebars.js'], dest: 'temp/'}
+				]
+			}
+		},
 
-    coffee: {
-      app: {
-        src: ['src/**/*.coffee'],
-        options: {
-          bare: true
-        }
-      },
-      spec: {
-        src: ['spec/**/*.coffee'],
-        options: {
-          bare: true
-        }
-      }
-    },
-    coffeelint: {
-      app: ['src/**/*.coffee']
-    },
+		coffee: {
+			app: {
+				options: {
+					bare: true,
+					sourceMap: true
+				},
+				expand: true,
+				cwd: 'src',
+				src: ['**/*.coffee'],
+				dest: 'temp/',
+				ext: '.js'
+			}
+		},
 
-    concat: {
-      dist: {
-        src: ['<banner:meta.banner>', '<file_strip_banner:src/<%= pkg.name %>.js>'],
-        dest: 'dist/<%= pkg.name %>.js'
-      }
-    },
-    min: {
-      dist: {
-        src: ['<banner:meta.banner>', '<config:concat.dist.dest>'],
-        dest: 'dist/<%= pkg.name %>.min.js'
-      }
-    },
+		uglify: {
+			options: {
+				banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+			},
+			build: {
+				files: {
+					'dist/opensong.min.js': ['temp/*.js']
+				}
+			}
+		}
 
-    // use the 'reload' port to use reloading func
-    server: {
-      port: 8000,
-      base: '.'
-    },
-    //FIXME: reloading
-    reload: {
-      port: 3001,
-      proxy: {
-        host: 'localhost',
-        port: '8000'
-      }
-    },
+	});
 
-    watch: {
-      coffee: {
-        files: ['src/**/*.coffee', 'spec/**/*.coffee'],
-        tasks: 'coffee coffeelint concat'
-      },
-      reload: {
-        files: ['dist/**'],
-        tasks: 'reload'
-      }
-    },
+	grunt.loadNpmTasks('grunt-contrib-coffee');
+	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-contrib-copy');
 
-    uglify: {}
-  });
+	grunt.registerTask('default', ['copy', 'coffee', 'uglify']);
 
-  grunt.loadNpmTasks('grunt-coffee');
-  grunt.loadNpmTasks('grunt-coffeelint');
-  grunt.loadNpmTasks('grunt-reload');
-
-  grunt.registerTask('wait', 'Wait forever.', function() {
-    grunt.log.write('Waiting...');
-    this.async();
-  });
-
-  grunt.registerTask('dist', 'coffee concat min');
-  grunt.registerTask('default', 'dist server reload watch'); // Default task.
 };
 
