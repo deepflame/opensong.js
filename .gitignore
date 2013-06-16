@@ -1,4 +1,6 @@
 .DS_Store
 /node_modules/
-/src/opensong.js
+/components/
+/temp/
 /spec/*.js
+*.swp
