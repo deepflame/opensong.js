@@ -39,6 +39,20 @@ module.exports = function(grunt) {
 			}
 		},
 
+		stylus: {
+			compile: {
+				options: {
+					use: [
+						//require('fluidity') // use stylus plugin at compile time
+					],
+				},
+				files: {
+					'dist/opensong.css': ['src/opensong.styl'],
+					'dist/opensong.demo.css': ['src/opensong.styl', 'src/demo.styl']
+				}
+			}
+		},
+
 		connect: {
 			server: {
 				options: {
@@ -65,6 +79,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-coffee');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-contrib-stylus');
 	grunt.loadNpmTasks('grunt-contrib-connect');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
