@@ -13,7 +13,7 @@ module.exports = function(grunt) {
 			bower: {
 				files: [
 					{expand: true, flatten: true, src: ['components/jquery/jquery.js'], dest: 'temp/'},
-					{expand: true, flatten: true, src: ['components/handlebars/handlebars.js'], dest: 'temp/'}
+					{expand: true, flatten: true, src: ['components/handlebars/handlebars.runtime.js'], dest: 'temp/'}
 				]
 			}
 		},
@@ -57,6 +57,16 @@ module.exports = function(grunt) {
 			}
 		},
 
+		handlebars: {
+			compile: {
+				options: {
+					namespace: "JST"
+				},
+				files: {
+					"temp/opensong.hbs.js": "src/opensong.hbs"
+				}
+			}
+		},
 		connect: {
 			server: {
 				options: {
@@ -85,11 +95,15 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-coffee');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-stylus');
+	grunt.loadNpmTasks('grunt-contrib-handlebars');
 	grunt.loadNpmTasks('grunt-contrib-connect');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
-	grunt.registerTask('default', ['clean', 'copy', 'coffee', 'uglify', 'stylus']);
-	grunt.registerTask('dev', ['default', 'connect', 'watch']);
+	grunt.registerTask('compile', ['coffee', 'stylus', 'handlebars']);
+	grunt.registerTask('build', ['clean', 'copy', 'compile', 'uglify']);
+	grunt.registerTask('dev', ['build', 'connect', 'watch']);
+
+	grunt.registerTask('default', ['build']);
 
 };
 

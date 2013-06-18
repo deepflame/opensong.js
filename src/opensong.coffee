@@ -12,30 +12,7 @@ class opensong.Song
 
   constructor: (element, lyrics) ->
     @el = getDomElem element
-    @tpl = do ->
-      # TODO: support comments
-      templateSrc = """
-        {{#this}}
-        <h2>{{human_header header}}</h2>
-          {{#lines}}
-        <table>
-          <tr class="chords">
-            {{#chords}}
-            <td>{{transpose this}}</td>
-            {{/chords}}
-          </tr>
-            {{#lyrics}}
-          <tr class='lyrics'>
-              {{#this}}
-            <td>{{this}}</td>
-              {{/this}}
-          </tr>
-            {{/lyrics}}
-        </table>
-          {{/lines}}
-        {{/this}}
-      """
-      Handlebars.compile templateSrc
+    @tpl = window['JST']['src/opensong.hbs']
 
     this.setLyrics lyrics
 

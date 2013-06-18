@@ -1,0 +1,20 @@
+{{#this}}
+<h2>{{human_header header}}</h2>
+{{#lines}}
+<table>
+	<tr class="chords">
+		{{#chords}}
+		<td>{{transpose this}}</td>
+		{{/chords}}
+	</tr>
+	{{#lyrics}}
+	<tr class='lyrics'>
+		{{#this}}
+		<td>{{this}}</td>
+		{{/this}}
+	</tr>
+	{{/lyrics}}
+</table>
+{{/lines}}
+{{/this}}
+
