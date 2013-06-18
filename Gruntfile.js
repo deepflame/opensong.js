@@ -32,17 +32,6 @@ module.exports = function(grunt) {
 			}
 		},
 
-		uglify: {
-			options: {
-				banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
-			},
-			build: {
-				files: {
-					'dist/opensong.min.js': ['temp/*.js']
-				}
-			}
-		},
-
 		stylus: {
 			compile: {
 				options: {
@@ -67,6 +56,18 @@ module.exports = function(grunt) {
 				}
 			}
 		},
+
+		uglify: {
+			options: {
+				banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+			},
+			build: {
+				files: {
+					'dist/opensong.min.js': ['temp/*.js']
+				}
+			}
+		},
+
 		connect: {
 			server: {
 				options: {
@@ -93,9 +94,9 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-coffee');
-	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-stylus');
 	grunt.loadNpmTasks('grunt-contrib-handlebars');
+	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-connect');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
