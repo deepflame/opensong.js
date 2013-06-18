@@ -81,6 +81,10 @@ module.exports = function(grunt) {
 				files: ['src/**/*.coffee', 'spec/**/*.coffee'],
 				tasks: ['coffee', 'uglify']
 			},
+			stylus: {
+				files: ['src/**/*.styl'],
+				tasks: ['stylus']
+			},
 			livereload: {
 				files: ['index.html', 'dist/**'],
 				options: {
