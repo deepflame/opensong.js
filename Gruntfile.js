@@ -5,6 +5,10 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 
+		clean: {
+			build: ["dist"]
+		},
+
 		copy: {
 			bower: {
 				files: [
@@ -76,6 +80,7 @@ module.exports = function(grunt) {
 
 	});
 
+	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-coffee');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -83,7 +88,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-connect');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
-	grunt.registerTask('default', ['copy', 'coffee', 'uglify']);
+	grunt.registerTask('default', ['clean', 'copy', 'coffee', 'uglify', 'stylus']);
 	grunt.registerTask('dev', ['default', 'connect', 'watch']);
 
 };
