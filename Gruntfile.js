@@ -91,6 +91,16 @@ module.exports = function(grunt) {
 					livereload: true
 				}
 			}
+		},
+
+		jasmine: {
+			testing: {
+				src: 'temp/**/*.js',
+				options: {
+					specs: 'spec/*Spec.js',
+					helpers: 'spec/*Helper.js'
+				}
+			}
 		}
 
 	});
@@ -103,10 +113,12 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-connect');
 	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-contrib-jasmine');
 
 	grunt.registerTask('compile', ['coffee', 'stylus', 'handlebars']);
 	grunt.registerTask('build', ['clean', 'copy', 'compile', 'uglify']);
 	grunt.registerTask('dev', ['build', 'connect', 'watch']);
+	grunt.registerTask('test', ['build', 'jasmine']);
 
 	grunt.registerTask('default', ['build']);
 
