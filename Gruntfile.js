@@ -100,7 +100,7 @@ module.exports = function(grunt) {
 				tasks: ['stylus']
 			},
 			livereload: {
-				files: ['index.html', 'dist/**'],
+				files: ['demo/index.html', 'dist/**'],
 				options: {
 					livereload: true
 				}
