@@ -8,15 +8,14 @@ module.exports = function(grunt) {
 		pkg: grunt.file.readJSON('package.json'),
 
 		clean: {
-			build: ["temp", "dist"],
-			specs: ["spec/**/*.js"]
+			build: ["temp", "dist"]
 		},
 
 		copy: {
 			bower: {
 				files: [
-					{expand: true, flatten: true, src: ['components/jquery/jquery.js'], dest: 'temp/'},
-					{expand: true, flatten: true, src: ['components/handlebars/handlebars.runtime.js'], dest: 'temp/'}
+					{expand: true, flatten: true, src: ['components/jquery/jquery.js'], dest: 'temp/src/'},
+					{expand: true, flatten: true, src: ['components/handlebars/handlebars.runtime.js'], dest: 'temp/src/'}
 				]
 			}
 		},
@@ -30,7 +29,7 @@ module.exports = function(grunt) {
 				expand: true,
 				cwd: 'src',
 				src: ['**/*.coffee'],
-				dest: 'temp/',
+				dest: 'temp/src',
 				ext: '.js'
 			},
 			specs: {
@@ -38,7 +37,7 @@ module.exports = function(grunt) {
 				flatten: true,
 				cwd: 'spec',
 				src: ['**/*.coffee'],
-				dest: 'spec',
+				dest: 'temp/spec',
 				ext: '.js'
 			}
 		},
@@ -63,7 +62,7 @@ module.exports = function(grunt) {
 					namespace: "JST"
 				},
 				files: {
-					"temp/opensong.hbs.js": "src/opensong.hbs"
+					"temp/src/opensong.hbs.js": "src/opensong.hbs"
 				}
 			}
 		},
@@ -72,12 +71,12 @@ module.exports = function(grunt) {
 			options: {
 				banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
 				sourceMap: 'dist/opensong.min.map',
-				sourceMapRoot: 'temp/' // the location to find your original source
+				sourceMapRoot: 'temp/src/' // the location to find your original source
 			//	sourceMapIn: 'temp/opensong.map'  // input sourcemap from a previous compilation
 			},
 			build: {
 				files: {
-					'dist/opensong.min.js': ['temp/*.js']
+					'dist/opensong.min.js': ['temp/src/*.js']
 				}
 			}
 		},
@@ -111,8 +110,8 @@ module.exports = function(grunt) {
 			testing: {
 				src: 'dist/opensong.min.js',
 				options: {
-					specs: 'spec/*Spec.js',
-					helpers: 'spec/*Helper.js'
+					specs: 'temp/spec/*Spec.js',
+					helpers: 'temp/spec/*Helper.js'
 				}
 			}
 		}
