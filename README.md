@@ -31,21 +31,23 @@ To start hacking on the code you need apparantly to check out the source code. W
 ### Requirements
 
   - [Nodejs](http://nodejs.org/ "Nodejs") for your platform
-  - grunt (see below how to install it)
-  
+  - gruntjs
+  - bower
+
 Nodejs comes now prepackaged with NPM, its package manager. To install grunt execute:
 
-    npm install grunt -g
-  
-With the -g option we install grunt globally. We need this to be able to use the command line utility.
+    npm install grunt-cli -g
+    npm install bower -g
+
 
 ### Install dependencies
 
 In the source code folder execute:
 
     npm install
-    
-This will install all dependencies specified in `package.json`.
+    bower install
+
+This will install all nodejs and frontend javascript dependencies.
 
 ### Start Coding
 
@@ -60,8 +62,7 @@ The CoffeeScript files need to be compiled into Javascript. This can be automate
 
 You can start a watcher that will automatically compile the coffee files. In your source root dir run:
 
-    grunt
-    grunt.cmd (on Windows)
+    grunt dev
 
 
 ## License
