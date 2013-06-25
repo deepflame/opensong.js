@@ -13,16 +13,16 @@ Check out the [Demo](http://deepflame.github.com/opensong.js/ "Demo").
 
 ## What is OpenSong?
 
-> OpenSong is a free, open-source software application created to manage lyrics, chords, lead sheets, overheads, computer projection, and more.   
->   
-> OpenSong releases are available for Microsoft Windows, Mac OSX, and Linux operating systems.   
->   
+> OpenSong is a free, open-source software application created to manage lyrics, chords, lead sheets, overheads, computer projection, and more.
+>
+> OpenSong releases are available for Microsoft Windows, Mac OSX, and Linux operating systems.
+>
 > [Download](http://opensong.org/d/downloads) the full application for free and give it a try!
 
 
 ## Getting Started
 
-Development on this project can be done on all major platforms (Windowd, Mac, Linux). 
+Development on this project can be done on all major platforms (Windowd, Mac, Linux).
 
 If you know current web technologies you should be ready to go.
 
@@ -39,6 +39,7 @@ Nodejs comes now prepackaged with NPM, its package manager. To install grunt exe
     npm install grunt-cli -g
     npm install bower -g
 
+With the -g option we install the dependencies globally. We need this to be able to use the command line utility.
 
 ### Install dependencies
 
