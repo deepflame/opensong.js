@@ -8,7 +8,8 @@ module.exports = function(grunt) {
 		pkg: grunt.file.readJSON('package.json'),
 
 		clean: {
-			build: ["temp", "dist"]
+			build: ["temp", "dist"],
+			specs: ["spec/**/*.js"]
 		},
 
 		copy: {
