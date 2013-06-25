@@ -1,3 +1,5 @@
+// vim: set noexpandtab :
+
 /*global module:false*/
 module.exports = function(grunt) {
 
@@ -6,7 +8,7 @@ module.exports = function(grunt) {
 		pkg: grunt.file.readJSON('package.json'),
 
 		clean: {
-			build: ["dist"]
+			build: ["temp", "dist"]
 		},
 
 		copy: {
@@ -59,7 +61,10 @@ module.exports = function(grunt) {
 
 		uglify: {
 			options: {
-				banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+				banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
+				sourceMap: 'dist/opensong.min.map',
+				sourceMapRoot: 'temp/' // the location to find your original source
+			//	sourceMapIn: 'temp/opensong.map'  // input sourcemap from a previous compilation
 			},
 			build: {
 				files: {
@@ -95,7 +100,7 @@ module.exports = function(grunt) {
 
 		jasmine: {
 			testing: {
-				src: 'temp/**/*.js',
+				src: 'dist/opensong.min.js',
 				options: {
 					specs: 'spec/*Spec.js',
 					helpers: 'spec/*Helper.js'
