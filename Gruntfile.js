@@ -49,7 +49,6 @@ module.exports = function(grunt) {
 				},
 				files: {
 					'dist/opensong.css': ['src/opensong.styl'],
-					'dist/opensong.demo.css': ['src/opensong.styl', 'src/demo.styl']
 				}
 			}
 		},
