@@ -14,8 +14,8 @@ module.exports = function(grunt) {
 		copy: {
 			bower: {
 				files: [
-					{expand: true, flatten: true, src: ['components/jquery/jquery.js'], dest: 'temp/src/'},
-					{expand: true, flatten: true, src: ['components/handlebars/handlebars.runtime.js'], dest: 'temp/src/'}
+					{expand: true, flatten: true, src: ['bower_components/jquery/jquery.js'], dest: 'temp/src/'},
+					{expand: true, flatten: true, src: ['bower_components/handlebars/handlebars.runtime.js'], dest: 'temp/src/'}
 				]
 			}
 		},
