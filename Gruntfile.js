@@ -1,5 +1,3 @@
-// vim: set noexpandtab :
-
 /*global module:false*/
 module.exports = function(grunt) {
 
@@ -137,3 +135,4 @@ module.exports = function(grunt) {
 
 };
 
+// vim: set noexpandtab :
