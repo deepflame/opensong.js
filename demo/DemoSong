@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<song>
+  <title>DemoSong</title>
+  <author>Andreas Boehrnsen</author>
+  <copyright>LGPL</copyright>
+  <presentation>V C V C C</presentation>
+  <ccli></ccli>
+  <capo print="false"></capo>
+  <key></key>
+  <aka></aka>
+  <key_line></key_line>
+  <user1></user1>
+  <user2></user2>
+  <user3></user3>
+  <theme></theme>
+  <tempo></tempo>
+  <time_sig></time_sig>
+  <lyrics>
+[V]
+.A
+ This is a Demo Song to show you the possibilities of iOpenSongs.
+.    B
+ Below are some instructions on how to use it.
+
+[C]
+.C
+ Copy your OpenSong files through iTunes to the application.
+.D
+ This Demo Song will then disappear and you can select the files you transferred.  <hymn_number></hymn_number></song>

@@ -5,15 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="stylesheet" type="text/css" href="http://getbootstrap.com/dist/css/bootstrap.css" />
-  <link rel="stylesheet" type="text/css" href="../dist/opensong.css" />
-  <script type="text/javascript" src="../dist/opensong.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="dist/opensong.css" />
+  <script type="text/javascript" src="dist/opensong.min.js"></script>
   <script type="text/javascript">
 
     var openSong;
 
     $(document).ready(function() {
 
-      $.get('Amazing Grace', function(data) {
+      $.get('demo/Amazing Grace', function(data) {
         var el       = $('#lyrics'),
             lyrics   = $(data).find("lyrics").text();
         $('#lyrics-src').html(lyrics);
@@ -83,4 +83,3 @@
 <script src="http://localhost:35729/livereload.js"></script>
 </body>
 </html>
-
