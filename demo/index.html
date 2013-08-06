@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>OpenSong Test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" type="text/css" href="http://getbootstrap.com/dist/css/bootstrap.css" />
+  <link rel="stylesheet" type="text/css" href="../dist/opensong.css" />
+  <script type="text/javascript" src="../dist/opensong.min.js"></script>
+  <script type="text/javascript">
+
+    var openSong;
+
+    $(document).ready(function() {
+
+      $.get('Amazing Grace', function(data) {
+        var el       = $('#lyrics'),
+            lyrics   = $(data).find("lyrics").text();
+        $('#lyrics-src').html(lyrics);
+
+        openSong = new opensong.Song(el, lyrics);
+      });
+
+      $('#lyrics-src').keyup(function(e) {
+        openSong.setLyrics($(this).val());
+      });
+
+      $('#transpose-selector').change(function(e) {
+        var amount = parseInt($(this).val());
+        openSong.transpose(amount);
+      });
+    });
+  </script>
+</head>
+<body>
+
+<div class="container">
+  <div class="page-header">
+    <h1>OpenSong.js Demo</h1>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <h2>Lyrics</h2>
+
+      <div class="">
+        <div class="form-group">
+          <label for="lyrics-src" class="control-label">Source</label>
+          <textarea id="lyrics-src" class="form-control" cols="80" rows="20"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="transpose-selector" class="control-label">Transpose by</label>
+          <select id="transpose-selector" class="form-control">
+            <option>+6</option>
+            <option>+5</option>
+            <option>+4</option>
+            <option>+3</option>
+            <option>+2</option>
+            <option>+1</option>
+            <option selected="selected">0</option>
+            <option>-1</option>
+            <option>-2</option>
+            <option>-3</option>
+            <option>-4</option>
+            <option>-5</option>
+            <option>-6</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-lg-6">
+      <h2>Rendering</h2>
+      <div id="lyrics" class="panel panel-primary"></div>
+    </div>
+  </div>
+
+  <footer>LGPL license &copy; 2011-2013 Andreas Böhrnsen</footer>
+</div>
+
+<script src="http://localhost:35729/livereload.js"></script>
+</body>
+</html>
+
