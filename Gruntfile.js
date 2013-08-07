@@ -111,8 +111,11 @@ module.exports = function(grunt) {
 					helpers: 'temp/spec/*Helper.js'
 				}
 			}
-		}
+		},
 
+		'gh-pages': {
+			src: ['index.html', 'dist/**/*', 'demo/*']
+		}
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-clean');
@@ -124,11 +127,13 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-connect');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-jasmine');
+	grunt.loadNpmTasks('grunt-gh-pages');
 
 	grunt.registerTask('compile', ['coffee', 'stylus', 'handlebars']);
 	grunt.registerTask('build', ['clean', 'copy', 'compile', 'uglify']);
 	grunt.registerTask('dev', ['build', 'connect', 'watch']);
 	grunt.registerTask('test', ['build', 'jasmine']);
+	grunt.registerTask('deploy', ['test', 'gh-pages']);
 
 	grunt.registerTask('default', ['build']);
 
