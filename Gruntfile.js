@@ -112,6 +112,12 @@ module.exports = function(grunt) {
 				}
 			}
 		},
+		
+		open: {
+			dev: {
+				path: 'http://127.0.0.1:9001'
+			}
+		},
 
 		'gh-pages': {
 			src: ['index.html', 'dist/**/*', 'demo/*']
@@ -127,11 +133,12 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-connect');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-jasmine');
+	grunt.loadNpmTasks('grunt-open');
 	grunt.loadNpmTasks('grunt-gh-pages');
 
 	grunt.registerTask('compile', ['coffee', 'stylus', 'handlebars']);
 	grunt.registerTask('build', ['clean', 'copy', 'compile', 'uglify']);
-	grunt.registerTask('dev', ['build', 'connect', 'watch']);
+	grunt.registerTask('dev', ['build', 'connect', 'open', 'watch']);
 	grunt.registerTask('test', ['build', 'jasmine']);
 	grunt.registerTask('deploy', ['test', 'gh-pages']);
 
