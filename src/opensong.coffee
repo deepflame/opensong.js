@@ -53,14 +53,8 @@ class opensong.Song
   Handlebars.registerHelper 'transpose', (chord) ->
     chord # just return chord, no transposing initially
 
-  Handlebars.registerHelper 'if_or', (cond1, cond2, options) ->
-    type1 = toString.call cond1
-    cond1 = cond1.call this if type1 is functionType
-    type2 = toString.call cond2
-    cond2 = cond2.call this if type2 is functionType
-
-    if (!cond1 or Handlebars.Utils.isEmpty cond1) and \
-       (!cond2 or Handlebars.Utils.isEmpty cond2)
+  Handlebars.registerHelper 'if_or', (elem1, elem2, options) ->
+    if Handlebars.Utils.isEmpty(elem1) and Handlebars.Utils.isEmpty(elem2)
       options.inverse this
     else
       options.fn this
