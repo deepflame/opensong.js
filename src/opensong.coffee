@@ -114,7 +114,7 @@ json = [
       {
         chords: ["A", "C"],
         lyrics: [
-          ["Yeah", "Yeah, God is grea!"]
+          ["Yeah", "Yeah, God is great!"]
         ]
       },
       {
