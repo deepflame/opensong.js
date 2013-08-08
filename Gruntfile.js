@@ -87,9 +87,13 @@ module.exports = function(grunt) {
 		},
 
 		watch: {
-			coffee: {
-				files: ['src/**/*.coffee', 'spec/**/*.coffee'],
-				tasks: ['coffee', 'uglify']
+			coffee_app: {
+				files: ['src/**/*.coffee'],
+				tasks: ['coffee:app', 'uglify']
+			},
+			coffee_specs: {
+				files: ['spec/**/*.coffee'],
+				tasks: ['coffee:specs']
 			},
 			handlebars: {
 				files: ['src/**/*.hbs'],
@@ -98,6 +102,10 @@ module.exports = function(grunt) {
 			stylus: {
 				files: ['src/**/*.styl'],
 				tasks: ['stylus']
+			},
+			specs: {
+				files: ['temp/spec/**/*.js', 'dist/**/*.js'],
+				tasks: ['jasmine']
 			},
 			livereload: {
 				files: ['index.html', 'dist/**'],
