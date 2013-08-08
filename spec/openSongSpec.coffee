@@ -45,18 +45,40 @@ describe "opensong.helper", ->
 
   describe ".parseLyrics", ->
 
-    it "parses comments", ->
-      src = "; Comment"
+    it "parses header", ->
+      src = "[C]"
       model = opensong.helper.parseLyrics src
-      expect(model.length).toEqual 1
+      expect(model).toEqual [
+        header: "C"
+        lines: []
+      ]
 
     it "parses chords", ->
-      src = ". C D"
+      src = ".D"
       model = opensong.helper.parseLyrics src
-      expect(model.length).toEqual 1
+      expect(model).toEqual [
+        header: undefined
+        lines: [
+          chords: ["D"]
+        ]
+      ]
 
     it "parses lyrics", ->
       src = " Lyrics"
       model = opensong.helper.parseLyrics src
-      expect(model.length).toEqual 1
+      expect(model).toEqual [
+        header: undefined
+        lines: [
+          lyrics: ["Lyrics"]
+        ]
+      ]
 
+    it "parses comments", ->
+      src = ";Comment"
+      model = opensong.helper.parseLyrics src
+      expect(model).toEqual [
+        header: undefined
+        lines: [
+          comments: "Comment"
+        ]
+      ]
