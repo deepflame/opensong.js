@@ -91,6 +91,10 @@ module.exports = function(grunt) {
 				files: ['src/**/*.coffee', 'spec/**/*.coffee'],
 				tasks: ['coffee', 'uglify']
 			},
+			handlebars: {
+				files: ['src/**/*.hbs'],
+				tasks: ['handlebars', 'uglify']
+			},
 			stylus: {
 				files: ['src/**/*.styl'],
 				tasks: ['stylus']
