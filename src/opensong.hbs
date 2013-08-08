@@ -1,8 +1,12 @@
 {{#this}}
+{{!-- Header --}}
 {{#if header}}
 <h2>{{human_header header}}</h2>
 {{/if}}
+
 {{#lines}}
+
+{{!-- Lyrics and Chords--}}
 {{#if_or lyrics chords}}
 <table>
 	<tr class="chords">
@@ -19,10 +23,14 @@
 	{{/lyrics}}
 </table>
 {{/if_or}}
+
+{{!-- Comments --}}
 {{#if comments}}
 <div class"comments">
   {{comments}}
 </div>
 {{/if}}
+
 {{/lines}}
+
 {{/this}}
