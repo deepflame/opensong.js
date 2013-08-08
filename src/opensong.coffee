@@ -140,7 +140,9 @@ opensong.helper.parseLyrics = (lyrics) ->
     continue unless line?
 
     switch line[0]
+      # header
       when "["
+        # add new object if current is "used"
         if dataObject.lines.length > 0
           dataObject =
             header: undefined
@@ -149,6 +151,8 @@ opensong.helper.parseLyrics = (lyrics) ->
 
         header = line.match(/\[(.*)\]/)[1]
         dataObject.header = header
+
+      # chords (with lyrics)
       when "."
         chordsLine = line.substr(1)
 
@@ -199,8 +203,12 @@ opensong.helper.parseLyrics = (lyrics) ->
 
         # attach the line again in front (we cut it off in the while loop)
         lyricsLines.unshift textLine if textLine isnt 'undefined'
+
+      # comments
       when ";"
         dataObject.lines.push {comments: line.substr(1)}
+
+      # lyrics and everythings else
       else
         if /^[ 0-9]/.test(line)
           dataObject.lines.push {lyrics: [line.substr(1)]}
