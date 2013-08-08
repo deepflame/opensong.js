@@ -43,4 +43,20 @@ describe "opensong.helper", ->
       expect(openSong.transposeChord "C/E",   1).toEqual "C#/F"
       expect(openSong.transposeChord "Em/D", -2).toEqual "Dm/C"
 
+  describe ".parseLyrics", ->
+
+    it "parses comments", ->
+      src = "; Comment"
+      model = opensong.helper.parseLyrics src
+      expect(model.length).toEqual 1
+
+    it "parses chords", ->
+      src = ". C D"
+      model = opensong.helper.parseLyrics src
+      expect(model.length).toEqual 1
+
+    it "parses lyrics", ->
+      src = " Lyrics"
+      model = opensong.helper.parseLyrics src
+      expect(model.length).toEqual 1
 
