@@ -29,6 +29,9 @@ class opensong.Song
     @model = opensong.helper.parseLyrics lyrics
     this.renderLyrics()
 
+  getModel: ->
+    @model
+
   renderLyrics: ->
     # clear Html Element and add opensong class
     @el.innerHTML = @tpl @model
@@ -215,4 +218,3 @@ opensong.helper.parseLyrics = (lyrics) ->
         else
           console?.log "no suppport for '#{line}'"
   dataModel
-
