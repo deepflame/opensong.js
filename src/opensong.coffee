@@ -130,7 +130,7 @@ opensong.helper.parseLyrics = (lyrics) ->
 
   dataModel = []
   dataObject =
-    header: ""
+    header: undefined
     lines: []
   dataModel.push dataObject
 
@@ -141,13 +141,14 @@ opensong.helper.parseLyrics = (lyrics) ->
 
     switch line[0]
       when "["
-        header = line.match(/\[(.*)\]/)[1]
-
         if dataObject.lines.length > 0
           dataObject =
-            header: header
+            header: undefined
             lines: []
           dataModel.push dataObject
+
+        header = line.match(/\[(.*)\]/)[1]
+        dataObject.header = header
       when "."
         chordsLine = line.substr(1)
 
