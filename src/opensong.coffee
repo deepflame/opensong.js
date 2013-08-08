@@ -195,7 +195,7 @@ opensong.helper.parseLyrics = (lyrics) ->
 
         dataObject.lines.push
           chords: chordArrCleaned
-          lyrics: textLineArr
+          lyrics: textLineArr if textLineArr.length > 0
 
         # attach the line again in front (we cut it off in the while loop)
         lyricsLines.unshift textLine if textLine isnt 'undefined'
