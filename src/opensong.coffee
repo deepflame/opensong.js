@@ -179,7 +179,8 @@ opensong.helper.parseLyrics = (lyrics) ->
         textLineArr = []
 
         # while we have lines that match a textLine create an html table row
-        while (textLine = lyricsLines.shift()) and (m = textLine.match(/^([ 1-9])(.*)/))
+        while (textLine = lyricsLines.shift()) and \
+              (m = textLine.match(/^([ 1-9])(.*)/))
           textArr = []
           textLineNr = m[1]
           textLine = m[2]
