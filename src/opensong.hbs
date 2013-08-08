@@ -3,6 +3,7 @@
 <h2>{{human_header header}}</h2>
 {{/if}}
 {{#lines}}
+{{#if_or lyrics chords}}
 <table>
 	<tr class="chords">
 		{{#chords}}
@@ -17,6 +18,7 @@
 	</tr>
 	{{/lyrics}}
 </table>
+{{/if_or}}
 {{#if comments}}
 <div class"comments">
   {{comments}}
