@@ -53,6 +53,23 @@ module.exports = function(grunt) {
 			}
 		},
 
+		recess: {
+			options: {
+				compile: true
+			},
+			bootstrap: {
+				src: ['src/bootstrap.less'],
+				dest: 'dist/bootstrap.custom.css'
+			},
+			min: {
+				options: {
+					compress: true
+				},
+				src: ['dist/bootstrap.custom.css', 'opensong.css'],
+				dest: 'dist/opensong.min.css'
+			}
+		},
+
 		handlebars: {
 			compile: {
 				options: {
@@ -145,10 +162,11 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-connect');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-jasmine');
+	grunt.loadNpmTasks('grunt-recess');
 	grunt.loadNpmTasks('grunt-open');
 	grunt.loadNpmTasks('grunt-gh-pages');
 
-	grunt.registerTask('compile', ['coffee', 'stylus', 'handlebars']);
+	grunt.registerTask('compile', ['coffee', 'stylus', 'recess', 'handlebars']);
 	grunt.registerTask('build', ['clean', 'copy', 'compile', 'uglify']);
 	grunt.registerTask('dev', ['build', 'connect', 'open', 'watch']);
 	grunt.registerTask('test', ['build', 'jasmine']);
