@@ -86,7 +86,7 @@ module.exports = function(grunt) {
 				banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
 				sourceMap: 'dist/opensong.min.map',
 				sourceMapRoot: 'temp/src/' // the location to find your original source
-			//	sourceMapIn: 'temp/opensong.map'  // input sourcemap from a previous compilation
+				//	sourceMapIn: 'temp/opensong.map'  // input sourcemap from a previous compilation
 			},
 			build: {
 				files: {
@@ -142,7 +142,7 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-		
+
 		open: {
 			dev: {
 				path: 'http://127.0.0.1:9001'
