@@ -65,7 +65,7 @@ module.exports = function(grunt) {
 				options: {
 					compress: true
 				},
-				src: ['dist/bootstrap.custom.css', 'opensong.css'],
+				src: ['dist/opensong.css', 'dist/bootstrap.custom.css'],
 				dest: 'dist/opensong.min.css'
 			}
 		},
