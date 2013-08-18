@@ -88,7 +88,10 @@ opensong.helper.transposeChord = (chord, amount) ->
 
 
 opensong.helper.humanizeHeader = (abbr) ->
-  abbArr = /([a-zA-Z]+)(\d*)/.exec(abbr)[1..]
+  abbArr = /([a-zA-Z])(\d*)/.exec(abbr)
+  return abbr unless abbArr # return string if it cannot be parsed
+
+  abbArr = abbArr[1..] # remove full regexp match
   char = abbArr[0]
 
   abbArr[0] = switch char

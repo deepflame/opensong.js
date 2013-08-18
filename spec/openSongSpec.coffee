@@ -11,6 +11,7 @@ describe "opensong.helper", ->
       expect(openSong.humanizeHeader 'C').toEqual 'Chorus'
       expect(openSong.humanizeHeader 'V').toEqual 'Verse'
       expect(openSong.humanizeHeader 'V1').toEqual 'Verse 1'
+      expect(openSong.humanizeHeader '1').toEqual '1'
 
   describe ".transposeChord", ->
 
