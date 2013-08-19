@@ -88,27 +88,25 @@ opensong.helper.transposeChord = (chord, amount) ->
 
 
 opensong.helper.humanizeHeader = (abbr) ->
-  abbArr = /([a-zA-Z])(\d*)/.exec(abbr)
-  return abbr unless abbArr # return string if it cannot be parsed
+  replacements =
+    "C": "Chorus"
+    "V": "Verse"
+    "B": "Bridge"
+    "T": "Tag"
+    "P": "Pre-Chorus"
 
-  abbArr = abbArr[1..] # remove full regexp match
-  char = abbArr[0]
+  regexp = new RegExp("^([#{Object.keys(replacements).join("")}])(.*)$", "i")
+  abbArr = regexp.exec(abbr)
+  return abbr unless abbArr # <- !!
 
-  abbArr[0] = switch char
-    when "C"
-      "Chorus"
-    when "V"
-      "Verse"
-    when "B"
-      "Bridge"
-    when "T"
-      "Tag"
-    when "P"
-      "Pre-Chorus"
-    else
-      char
+  # clean match
+  abbArr = abbArr[1..]
+  abbArr.pop() if abbArr[1] is ""
 
-  abbArr.pop() if abbArr[1] is "" # remove num if empty
+  # do replacement
+  char = abbArr[0].toUpperCase()
+  abbArr[0] = replacements[char]
+
   abbArr.join " "
 
 ###
