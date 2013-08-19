@@ -7,11 +7,30 @@ describe "opensong.helper", ->
 
   describe ".humanizeHeader", ->
 
-    it "humanizes header", ->
+    it "substitutes certain leading letters", ->
       expect(openSong.humanizeHeader 'C').toEqual 'Chorus'
       expect(openSong.humanizeHeader 'V').toEqual 'Verse'
+      expect(openSong.humanizeHeader 'B').toEqual 'Bridge'
+      expect(openSong.humanizeHeader 'T').toEqual 'Tag'
+      expect(openSong.humanizeHeader 'P').toEqual 'Pre-Chorus'
+
+    it "supports lowercase", ->
+      expect(openSong.humanizeHeader 'c').toEqual 'Chorus'
+      expect(openSong.humanizeHeader 'v').toEqual 'Verse'
+      expect(openSong.humanizeHeader 'b').toEqual 'Bridge'
+      expect(openSong.humanizeHeader 't').toEqual 'Tag'
+      expect(openSong.humanizeHeader 'p').toEqual 'Pre-Chorus'
+
+    it "seperates the rest with a space if it matches", ->
       expect(openSong.humanizeHeader 'V1').toEqual 'Verse 1'
+      expect(openSong.humanizeHeader 'v1').toEqual 'Verse 1'
+      expect(openSong.humanizeHeader 'vlast').toEqual 'Verse last'
+
+    it "does not change unmatched headers", ->
+      expect(openSong.humanizeHeader 'x').toEqual 'x'
       expect(openSong.humanizeHeader '1').toEqual '1'
+      expect(openSong.humanizeHeader 'section1').toEqual 'section1'
+
 
   describe ".transposeChord", ->
 
