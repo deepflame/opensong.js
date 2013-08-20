@@ -8,6 +8,15 @@
 opensong = opensong || {}
 opensong.helper = opensong.helper || {}
 
+opensong.i18n = opensong.i18n || {}
+opensong.i18n.headerReplacements = \
+  opensong.i18n.headerReplacements ||
+    "C": "Chorus"
+    "V": "Verse"
+    "B": "Bridge"
+    "T": "Tag"
+    "P": "Pre-Chorus"
+
 class opensong.Song
 
   toString = Object.prototype.toString
@@ -88,13 +97,8 @@ opensong.helper.transposeChord = (chord, amount) ->
 
 
 opensong.helper.humanizeHeader = (abbr) ->
-  replacements =
-    "C": "Chorus"
-    "V": "Verse"
-    "B": "Bridge"
-    "T": "Tag"
-    "P": "Pre-Chorus"
 
+  replacements = opensong.i18n.headerReplacements
   regexp = new RegExp("^([#{Object.keys(replacements).join("")}])(.*)$", "i")
   abbArr = regexp.exec(abbr)
   return abbr unless abbArr # <- !!
