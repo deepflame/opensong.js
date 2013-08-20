@@ -15,6 +15,7 @@
     }
   </style>
   <script type="text/javascript" src="dist/opensong.min.js"></script>
+  <script type="text/javascript" src="dist/i18next-1.6.3.min.js"></script>
   <script type="text/javascript">
     var openSong;
 
@@ -40,6 +41,14 @@
       $('#transpose-selector').change(function(e) {
         var amount = parseInt($(this).val());
         openSong.transpose(amount);
+      });
+
+      $('#locale-selector').val(i18n.lng());
+      $('#locale-selector').change(function(e) {
+        var lang = $(this).val();
+        i18n.setLng(lang, function() {
+          openSong.renderLyrics();
+        });
       });
     });
   </script>
@@ -76,6 +85,14 @@
             <option>-4</option>
             <option>-5</option>
             <option>-6</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="locale-selector" class="control-label">Language</label>
+          <select id="locale-selector" class="form-control">
+            <option>de</option>
+            <option>en</option>
           </select>
         </div>
       </div>
