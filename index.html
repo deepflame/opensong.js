@@ -6,13 +6,29 @@
   <title>OpenSong Test</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="dist/opensong.css" />
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Source+Code+Pro">
+  <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="dist/opensong.min.css" />
+  <style type="text/css">
+    #lyrics-src {
+      font-family: "Source Code Pro", "Courier New", monospace;
+    }
+    #json-model {
+      height: 300px;
+      overflow: scroll;
+    }
+  </style>
   <script type="text/javascript" src="dist/opensong.min.js"></script>
+  <script type="text/javascript" src="dist/i18next-1.6.3.min.js"></script>
   <script type="text/javascript">
     var openSong;
 
     $(document).ready(function() {
+
+      i18n.init({
+      //debug: true,
+        fallbackLng: 'en'
+      });
 
       $.get('demo/Amazing Grace', function(data) {
         var el       = $('#lyrics'),
@@ -20,15 +36,27 @@
         $('#lyrics-src').html(lyrics);
 
         openSong = new opensong.Song(el, lyrics);
+        var modelString = JSON.stringify(openSong.getModel(), null, " ")
+        $('#json-model').text(modelString);
       });
 
       $('#lyrics-src').keyup(function(e) {
         openSong.setLyrics($(this).val());
+        var modelString = JSON.stringify(openSong.getModel(), null, " ")
+        $('#json-model').text(modelString);
       });
 
       $('#transpose-selector').change(function(e) {
         var amount = parseInt($(this).val());
         openSong.transpose(amount);
+      });
+
+      $('#locale-selector').val(i18n.lng());
+      $('#locale-selector').change(function(e) {
+        var lang = $(this).val();
+        i18n.setLng(lang, function() {
+          openSong.renderLyrics();
+        });
       });
     });
   </script>
@@ -46,7 +74,6 @@
 
       <div class="">
         <div class="form-group">
-          <label for="lyrics-src" class="control-label">Source</label>
           <textarea id="lyrics-src" class="form-control" cols="80" rows="20"></textarea>
         </div>
 
@@ -66,6 +93,14 @@
             <option>-4</option>
             <option>-5</option>
             <option>-6</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="locale-selector" class="control-label">Language</label>
+          <select id="locale-selector" class="form-control">
+            <option>de</option>
+            <option>en</option>
           </select>
         </div>
       </div>
