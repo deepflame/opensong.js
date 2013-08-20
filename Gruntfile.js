@@ -156,7 +156,7 @@ module.exports = function(grunt) {
 		},
 
 		'gh-pages': {
-			src: ['index.html', 'dist/**/*', 'demo/*']
+			src: ['index.html', 'dist/**/*', 'locales/**',  'demo/*']
 		}
 	});
 
