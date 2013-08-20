@@ -13,7 +13,13 @@ module.exports = function(grunt) {
 			bower: {
 				files: [
 					{expand: true, flatten: true, src: ['bower_components/jquery/jquery.js'], dest: 'temp/src/'},
-					{expand: true, flatten: true, src: ['bower_components/handlebars/handlebars.runtime.js'], dest: 'temp/src/'}
+					{expand: true, flatten: true, src: ['bower_components/handlebars/handlebars.runtime.js'], dest: 'temp/src/'},
+					{expand: true, flatten: true, src: ['bower_components/i18next/release/i18next-1.6.3.min.js'], dest: 'dist/'}
+				]
+			},
+			locales: {
+				files: [
+					{src: 'locales/**', dest: 'dist/'}
 				]
 			}
 		},
