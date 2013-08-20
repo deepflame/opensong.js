@@ -20,6 +20,11 @@
 
     $(document).ready(function() {
 
+      i18n.init({
+        debug: true,
+        fallbackLng: 'en'
+      });
+
       $.get('demo/Amazing Grace', function(data) {
         var el       = $('#lyrics'),
             lyrics   = $(data).find("lyrics").text();
