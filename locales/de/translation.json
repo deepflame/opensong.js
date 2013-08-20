@@ -1,0 +1,9 @@
+{
+	"header": {
+		"chorus": "Refrain",
+		"verse": "Strophe",
+		"bridge": "Zwischenteil",
+		"tag": "Markierung",
+		"pre-chorus": "Vorspiel"
+	}
+}
