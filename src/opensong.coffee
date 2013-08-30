@@ -170,9 +170,9 @@ opensong.helper.parseLyrics = (lyrics) ->
       # chords (with lyrics)
       when "."
         chordsLine = line.substr(1)
+        chordArr = []
 
         # split cords
-        chordArr = []
         while chordsLine.length > 0
           m = /^(\S*\s*)(.*)$/.exec(chordsLine)
           chordArr.push m[1]
@@ -187,9 +187,8 @@ opensong.helper.parseLyrics = (lyrics) ->
           chordArrCleaned.push m[1]
 
         textLine = ""
-        m = null
-
         textLineArr = []
+        m = null
 
         # while we have lines that match a textLine create an html table row
         while (textLine = lyricsLines.shift()) and \
@@ -228,4 +227,5 @@ opensong.helper.parseLyrics = (lyrics) ->
           dataObject.lines.push {lyrics: [line.substr(1)]}
         else
           console?.log "no suppport for '#{line}'"
+
   dataModel
