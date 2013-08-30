@@ -195,8 +195,8 @@ opensong.helper.parseLyrics = (lyrics) ->
             if i < chordArr.length - 1
               chordLength = chordArr[i].length
               # split String with RegExp (is there a better way?)
-              m = textLine.match(new RegExp("(.{0," + chordLength + "})(.*)"))
               textArr.push m[1].replace(cleanRegExp, "")
+              m = textLine.match(new RegExp("(.{0,#{chordLength}})(.*)"))
               textLine = m[2]
             else
               # add the whole string if at the end of the chord arr
