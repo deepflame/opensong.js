@@ -25,19 +25,27 @@
 
     $(document).ready(function() {
 
+      var songUrl = "demo/Amazing Grace";
+
       i18n.init({
       //debug: true,
         fallbackLng: 'en'
-      });
+      }, function() {
 
-      $.get('demo/Amazing Grace', function(data) {
-        var el       = $('#lyrics'),
-            lyrics   = $(data).find("lyrics").text();
-        $('#lyrics-src').html(lyrics);
+        // load song
+        $.get(songUrl, function(data) {
+          var el       = $('#lyrics'),
+              lyrics   = $(data).find("lyrics").text();
+          $('#lyrics-src').html(lyrics);
 
-        openSong = new opensong.Song(el, lyrics);
-        var modelString = JSON.stringify(openSong.getModel(), null, " ")
-        $('#json-model').text(modelString);
+          openSong = new opensong.Song(el, lyrics);
+          var modelString = JSON.stringify(openSong.getModel(), null, " ")
+          $('#json-model').text(modelString);
+        });
+
+        // set language selector
+        var lang = i18n.lng().split("-")[0];
+        $('#locale-selector').val(lang);
       });
 
       $('#lyrics-src').keyup(function(e) {
@@ -51,7 +59,6 @@
         openSong.transpose(amount);
       });
 
-      $('#locale-selector').val(i18n.lng());
       $('#locale-selector').change(function(e) {
         var lang = $(this).val();
         i18n.setLng(lang, function() {
