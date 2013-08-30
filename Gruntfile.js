@@ -28,7 +28,7 @@ module.exports = function(grunt) {
 			app: {
 				options: {
 					bare: true,
-					sourceMap: true
+					sourceMap: false 
 				},
 				expand: true,
 				cwd: 'src',
@@ -89,10 +89,7 @@ module.exports = function(grunt) {
 
 		uglify: {
 			options: {
-				banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
-				sourceMap: 'dist/opensong.min.map',
-				sourceMapRoot: 'temp/src/' // the location to find your original source
-				//	sourceMapIn: 'temp/opensong.map'  // input sourcemap from a previous compilation
+				banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
 			},
 			build: {
 				files: {
