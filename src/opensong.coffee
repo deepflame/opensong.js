@@ -56,6 +56,9 @@ class opensong.Song
   Handlebars.registerHelper 'transpose', (chord) ->
     chord # just return chord, no transposing initially
 
+  Handlebars.registerHelper 'clean_lyrics', (lyrics) ->
+    opensong.helper.cleanLyrics lyrics
+
   Handlebars.registerHelper 'if_or', (elem1, elem2, options) ->
     if Handlebars.Utils.isEmpty(elem1) and Handlebars.Utils.isEmpty(elem2)
       options.inverse this
@@ -111,6 +114,11 @@ opensong.helper.humanizeHeader = (abbr) ->
   abbArr[0] = i18n.t "header.#{abbArr[0].toLowerCase()}" if i18n?
 
   abbArr.join " "
+
+opensong.helper.cleanLyrics = (lyrics) ->
+  cleanRegExp = /_|\||---|-!!/g
+  lyrics.replace cleanRegExp, ""
+
 
 ###
 
@@ -180,7 +188,6 @@ opensong.helper.parseLyrics = (lyrics) ->
 
         textLine = ""
         m = null
-        cleanRegExp = /_|\||---|-!!/g
 
         textLineArr = []
 
@@ -195,12 +202,12 @@ opensong.helper.parseLyrics = (lyrics) ->
             if i < chordArr.length - 1
               chordLength = chordArr[i].length
               # split String with RegExp (is there a better way?)
-              textArr.push m[1].replace(cleanRegExp, "")
               m = textLine.match(new RegExp("(.{0,#{chordLength}})(.*)"))
+              textArr.push m[1]
               textLine = m[2]
             else
               # add the whole string if at the end of the chord arr
-              textArr.push textLine.replace(cleanRegExp, "")
+              textArr.push textLine
 
           textLineArr.push textArr
 

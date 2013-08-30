@@ -63,6 +63,13 @@ describe "opensong.helper", ->
       expect(openSong.transposeChord "C/E",   1).toEqual "C#/F"
       expect(openSong.transposeChord "Em/D", -2).toEqual "Dm/C"
 
+  describe ".cleanLyrics", ->
+
+    it "cleans page breaks", ->
+      lyrics = "||"
+      output = opensong.helper.cleanLyrics(lyrics)
+      expect(output).toEqual ""
+
   describe ".parseLyrics", ->
 
     it "parses header", ->
