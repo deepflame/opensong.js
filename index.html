@@ -39,6 +39,9 @@
           $('#json-model').text(modelString);
         });
 
+        // set language selector
+        var lang = i18n.lng().split("-")[0];
+        $('#locale-selector').val(lang);
       });
 
       $('#lyrics-src').keyup(function(e) {
@@ -50,7 +53,6 @@
         openSong.transpose(amount);
       });
 
-      $('#locale-selector').val(i18n.lng());
       $('#locale-selector').change(function(e) {
         var lang = $(this).val();
         i18n.setLng(lang, function() {
