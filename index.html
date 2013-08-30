@@ -21,17 +21,24 @@
 
     $(document).ready(function() {
 
+      var songUrl = "demo/Amazing Grace";
+
       i18n.init({
       //debug: true,
         fallbackLng: 'en'
-      });
+      }, function() {
 
-      $.get('demo/Amazing Grace', function(data) {
-        var el       = $('#lyrics'),
-            lyrics   = $(data).find("lyrics").text();
-        $('#lyrics-src').html(lyrics);
+        // load song
+        $.get(songUrl, function(data) {
+          var el       = $('#lyrics'),
+              lyrics   = $(data).find("lyrics").text();
+          $('#lyrics-src').html(lyrics);
 
-        openSong = new opensong.Song(el, lyrics);
+          openSong = new opensong.Song(el, lyrics);
+          var modelString = JSON.stringify(openSong.getModel(), null, " ")
+          $('#json-model').text(modelString);
+        });
+
       });
 
       $('#lyrics-src').keyup(function(e) {
