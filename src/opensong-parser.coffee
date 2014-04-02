@@ -64,7 +64,7 @@ opensong.helper.parseLyrics = (lyrics) ->
 
         # clean Chord line from trailing white spaces
         chordArrCleaned = []
-        $.each chordArr, (index, value) ->
+        chordArr.forEach (value) ->
           m = /(\S*\s?)\s*/.exec(value)
           chordArrCleaned.push m[1]
 
