@@ -56,7 +56,7 @@ opensong.helper.parseLyrics = (lyrics) ->
 
         # split cords
         while chordsLine.length > 0
-          m = /^(\S*\s*)(.*)$/.exec(chordsLine)
+          m = /^(\S*\s*)(.*)/.exec(chordsLine)
           chordArr.push m[1]
           chordsLine = m[2]
         # add an item if it is an empty line
