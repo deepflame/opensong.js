@@ -107,8 +107,6 @@ opensong.helper.parseLyrics = (lyrics) ->
       else
         if /^[ 0-9]/.test(line)
           dataObject.lines.push {lyrics: [line.substr(1)]}
-        else
-          console?.log "no suppport for '#{line}'"
 
   dataModel
 
