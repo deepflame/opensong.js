@@ -159,7 +159,8 @@ module.exports = function(grunt) {
 				'dist/**/*',
 				'locales/**',
 				'demo/*',
-				'package.json'
+				'package.json',
+				'.npmignore'
 			]
 		}
 	});
