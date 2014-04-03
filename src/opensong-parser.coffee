@@ -22,7 +22,7 @@ json = [
 
 ###
 opensong.helper.parseLyrics = (lyrics) ->
-  lyrics = lyrics.replace /\r\n?]/, '\n'
+  lyrics = lyrics.replace /\r\n?/g, '\n'
   lyricsLines = lyrics.split("\n")
 
   dataModel = []

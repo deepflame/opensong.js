@@ -109,3 +109,15 @@ describe "opensong.helper", ->
           comments: "Comment"
         ]
       ]
+
+    it "works with different line endings", ->
+      sources = ["[V]\r.C", "[V]\n.C", "[V]\r\n.C"]
+      sources.forEach (src) ->
+        model = opensong.helper.parseLyrics src
+        expect(model).toEqual [
+          header: 'V'
+          lines: [
+            chords: ['C']
+          ]
+        ]
+
