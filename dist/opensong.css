@@ -3,5 +3,5 @@
 .opensong td{padding-left:0;padding-right:0}
 .opensong tr.chords td{font-weight:bold;font-size:1em}
 .opensong tr.lyrics td{font-size:1em}
-.opensong .song-section{display:inline-block;min-width:45%}
+.opensong .song-section{display:inline-block;padding-left:15px;min-width:45%}
 .opensong .comments{font-style:italic;font-size:.8em}
