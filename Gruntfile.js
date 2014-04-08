@@ -94,6 +94,7 @@ module.exports = function(grunt) {
 			build: {
 				files: {
 					'dist/opensong.min.js': ['temp/src/*.js'],
+					'dist/opensong-helper.min.js': ['temp/src/opensong-helper.js'],
 					'dist/opensong-parser.min.js': ['temp/src/opensong-parser.js']
 				}
 			}
