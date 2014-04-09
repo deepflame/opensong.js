@@ -161,6 +161,7 @@ module.exports = function(grunt) {
 				'locales/**',
 				'demo/*',
 				'package.json',
+				'bower.json',
 				'.npmignore'
 			]
 		}
