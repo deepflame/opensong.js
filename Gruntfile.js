@@ -93,7 +93,9 @@ module.exports = function(grunt) {
 			},
 			build: {
 				files: {
-					'dist/opensong.min.js': ['temp/src/*.js']
+					'dist/opensong.min.js': ['temp/src/*.js'],
+					'dist/opensong-helper.min.js': ['temp/src/opensong-helper.js'],
+					'dist/opensong-parser.min.js': ['temp/src/opensong-parser.js']
 				}
 			}
 		},
@@ -153,7 +155,15 @@ module.exports = function(grunt) {
 		},
 
 		'gh-pages': {
-			src: ['.gitignore', 'index.html', 'dist/**/*', 'locales/**',  'demo/*']
+			src: [
+				'index.html',
+				'dist/**/*',
+				'locales/**',
+				'demo/*',
+				'package.json',
+				'bower.json',
+				'.npmignore'
+			]
 		}
 	});
 
