@@ -28,7 +28,7 @@ module.exports = function(grunt) {
 			app: {
 				options: {
 					bare: true,
-					sourceMap: false 
+					sourceMap: false
 				},
 				expand: true,
 				cwd: 'src',
