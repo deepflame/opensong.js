@@ -162,7 +162,8 @@ module.exports = function(grunt) {
 				'demo/*',
 				'package.json',
 				'bower.json',
-				'.npmignore'
+				'.npmignore',
+				'.gitignore'
 			]
 		}
 	});
