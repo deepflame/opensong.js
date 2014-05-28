@@ -153,7 +153,7 @@ module.exports = function(grunt) {
 		},
 
 		'gh-pages': {
-			src: ['index.html', 'dist/**/*', 'locales/**',  'demo/*']
+			src: ['.gitignore', 'index.html', 'dist/**/*', 'locales/**',  'demo/*']
 		}
 	});
 
