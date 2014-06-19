@@ -1,0 +1,9 @@
+{
+	"header": {
+		"chorus": "Refrain",
+		"verse": "Verset",
+		"bridge": "Pont",
+		"tag": "Libellé",
+		"pre-chorus": "Pre-refrain"
+	}
+}

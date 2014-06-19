@@ -1,0 +1,7 @@
+.opensong{font-family:Verdana,sans-serif;}
+.opensong table{border-collapse:collapse;white-space:pre}
+.opensong td{padding-left:0;padding-right:0}
+.opensong tr.chords td{font-weight:bold;font-size:1em}
+.opensong tr.lyrics td{font-size:1em}
+.opensong .song-section{padding-left:15px;min-width:45%}
+.opensong .comments{font-style:italic;font-size:.8em}

@@ -1,0 +1,9 @@
+{
+	"header": {
+		"chorus": "Chorus",
+		"verse": "Verse",
+		"bridge": "Bridge",
+		"tag": "Tag",
+		"pre-chorus": "Pre-Chorus"
+	}
+}
