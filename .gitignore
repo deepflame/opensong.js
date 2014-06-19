@@ -2,7 +2,6 @@
 /node_modules/
 /bower_components/
 /temp/
-/dist/
 /spec/*.js
 /.grunt/
 *.swp
