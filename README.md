@@ -56,7 +56,7 @@ The project uses these projects:
   - [CoffeeScript](http://coffeescript.org/ "CoffeeScript")
   - [jQuery](http://jquery.com/ "jQuery")
   - [Handlebars](http://handlebarsjs.com/ "Handlebars")
-  - [Jasmine](http://pivotal.github.com/jasmine/ "Jasmine")
+  - [Jasmine](https://jasmine.github.io/ "Jasmine")
 
 The CoffeeScript files need to be compiled into Javascript. This can be automated with grunt.
 
